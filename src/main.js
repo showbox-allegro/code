@@ -1,8 +1,15 @@
-import Vue from 'vue'
-import { Row, Col, Avatar, Layout, Button, Input } from 'ant-design-vue';
+import Vue from 'vue';
+import store from "./config/store";
+import { Badge, Menu, Modal, Spin, Alert, Icon, Row, Col, Avatar, Layout, Button, Input } from 'ant-design-vue';
 import App from './App.vue'
 import "@/less/main.less";
 
+Vue.use(Badge);
+Vue.use(Menu);
+Vue.use(Modal);
+Vue.use(Spin);
+Vue.use(Alert);
+Vue.use(Icon);
 Vue.use(Col);
 Vue.use(Row);
 Vue.use(Avatar);
@@ -13,5 +20,6 @@ Vue.use(Input);
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  render: h => h(App), 
+  store
 }).$mount('#app')
