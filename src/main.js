@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import store from "./config/store";
-import { Badge, Menu, Modal, Spin, Alert, Icon, Row, Col, Avatar, Layout, Button, Input } from 'ant-design-vue';
+import { Dropdown, Badge, Menu, Modal, Spin, Alert, Icon, Row, Col, Avatar, Layout, Button, Input } from 'ant-design-vue';
 import App from './App.vue'
 import "@/less/main.less";
 
+Vue.use(Dropdown);
 Vue.use(Badge);
 Vue.use(Menu);
 Vue.use(Modal);

@@ -44,6 +44,44 @@ main {
 .ant-input {
     background-color: @gray-1;
     color: @gray-9;
+    border-color: @gray-5;
+}
+
+.ant-dropdown-menu {
+    background-color: @gray-1;
+
+    &-item {
+        color: @gray-9 !important;
+
+        &:hover {
+            background-color: @gray-2;
+        }
+    }
+}
+
+.ant-input-search-button {
+    background-color: @gray-1;
+    border-color: @gray-5;
+}
+.ant-input-search-icon {
+    color: @gray-9;
+}
+
+.ant-btn-default {
+    background-color: @gray-1;
+    border-color: @gray-5;
+
+    &:hover {
+        background-color: @gray-1;
+    }
+}
+.ant-btn-dashed {
+    background-color: @gray-1;
+    border-color: @gray-5;
+
+    &:hover {
+        background-color: @gray-1;
+    }
 }
 
 .alerts {
@@ -55,6 +93,19 @@ main {
     flex-direction: column;
 }
 
+.title {
+    padding: 16px;
+    height: 64px;
+    border-bottom: 1px solid @gray-4;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    background-color: @gray-2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .box {
     background-color: @gray-2;
     border: 1px solid @gray-4;
@@ -64,7 +115,7 @@ main {
         padding: 16px;
         height: 64px;
         border-bottom: 1px solid @gray-4;
-        font-style: 16px;
+        font-size: 16px;
         font-weight: 600;
         line-height: 24px;
         display: flex;

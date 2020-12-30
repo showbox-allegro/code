@@ -31,11 +31,11 @@
                     </a-menu-item>
                 </template>
             </a-menu>
-            <div class="sidebar__empty" v-else>
+            <div class="sidebar__empty" @click="$emit('openLinks')" v-else>
                 <p v-if="!collapsed">Dodaj powiązania, aby rozpocząć! </p>
             </div>
             <div class="sidebar__bottom">
-                <a-button class="sidebar__bottom--btn" type="primary">
+                <a-button class="sidebar__bottom--btn" type="primary" @click="$emit('openLinks')">
                     <a-icon type="plus"></a-icon> 
                     <span v-if="!collapsed">Dodaj / Edytuj Powiązania</span>
                 </a-button>

@@ -2,7 +2,7 @@
     <a-layout-header class="header">
 
         <img src="../../assets/logo.svg">
-        <a-input-search class="header__search" placeholder="Szukaj"/>
+        <a-input-search class="header__search" enter-button placeholder="Szukaj"/>
         <a-avatar :size="32" icon="user" />
 
     </a-layout-header>
