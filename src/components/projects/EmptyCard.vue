@@ -27,6 +27,7 @@ export default {
 
         &:hover {
             text-decoration: underline;
+            border: dashed 1px @gray-6;
         }
 
         &__plus {

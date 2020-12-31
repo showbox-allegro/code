@@ -28,7 +28,10 @@
                 class="links__item" 
                 :key="template"
             >
-                Nazwa powiązania
+                <a-checkbox>
+                    <a-badge class="items__badge" :count="template" />
+                    Nazwa powiązania
+                </a-checkbox>
                 <a-dropdown>
                     <a class="ant-dropdown-link" @click="e => e.preventDefault()">
                         <a-icon type="more" />
@@ -66,6 +69,12 @@ export default {
 <style lang="less">
     .items {
         width: 50%;
+
+        &__badge {
+            margin-left: 4px;
+            margin-right: 4px;
+            margin-bottom: 2px;
+        }
 
     }
 </style>

@@ -1,4 +1,3 @@
-
 <template>
     <div class="products">   
         <div class="title">
@@ -20,17 +19,21 @@
             </a-button>
         </div>
         <div class="links__search">
-            <a-input-search enter-button placeholder="Szukaj"/>
+            <a-input-search enter-button placeholder="Szukaj" v-model="query"/>
         </div>
-        <ul class="links__items">
+        <s-empty v-if="!filteredProducts.length"></s-empty>
+        <ul v-else class="links__items">
             <li 
-                v-for="product in products" 
+                v-for="product in filteredProducts" 
                 :class="{'is-selected': product.id == selection}"
                 class="links__item" 
                 :key="product.id"
                 @click="$emit('selectProduct', product.id)"
             >
-                Nazwa produktu
+                <div>
+                    <img class="products__image" src="@/assets/products/pills.png" />
+                    Nazwa produktu
+                </div>
                 <a-dropdown>
                     <a class="ant-dropdown-link" @click="e => e.preventDefault()">
                         <a-icon type="more" />
@@ -50,14 +53,19 @@
 </template>
 
 <script>
+import Empty from "../layout/Empty";
 
 export default {
     name: 'Products',
     props: {
         selection: Number
     },
+    components: {
+        SEmpty: Empty
+    },
     data(){
         return {
+            query: "",
             products: [
                 {
                     id: 1,
@@ -82,6 +90,15 @@ export default {
             ]
         }
     },
+    computed: {
+        filteredProducts(){
+            return this.query 
+                ? 
+                this.products.filter(p=>p.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1 )
+                : 
+                this.products;
+        }
+    }
  
 }
 </script>
@@ -90,6 +107,13 @@ export default {
     .products {
         width: 25%;
         border-right: solid 1px @gray-4;
+
+        &__image {
+            width: 32px;
+            height: 32px;
+            border-radius: 2px;
+            margin-right: 4px;
+        }
 
     }
 </style>

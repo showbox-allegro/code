@@ -47,6 +47,22 @@ main {
     border-color: @gray-5;
 }
 
+.ant-checkbox-inner {
+    border-color: @gray-5;
+    background-color: @gray-1;
+}
+
+.ant-badge-count {
+    font-size: 10px;
+    font-weight: 600;
+    background: inherit;
+    box-shadow: 0 0 0 1px @gray-4;
+    min-width: 16px;
+    height: 16px;
+    line-height: 16px;
+    padding: 0 4px;
+}
+
 .ant-dropdown-menu {
     background-color: @gray-1;
 
@@ -55,6 +71,10 @@ main {
 
         &:hover {
             background-color: @gray-2;
+        }
+
+        &-divider {
+            background-color: @gray-4;
         }
     }
 }
@@ -71,7 +91,8 @@ main {
     background-color: @gray-1;
     border-color: @gray-5;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: @gray-1;
     }
 }
@@ -79,7 +100,8 @@ main {
     background-color: @gray-1;
     border-color: @gray-5;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: @gray-1;
     }
 }

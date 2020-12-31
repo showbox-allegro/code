@@ -19,8 +19,11 @@
                 @selectProduct="selectProduct"
             ></s-products>
             <s-items></s-items>
+            <div class="links__info links__info--2" v-if="!linkReady">
+                <p>Dodaj Szablony i Produkty, aby utworzyć powiązanie</p>
+            </div>
             <div class="links__info" v-if="linkReady">
-                <p>Nazwa szablonu z Nazwa produktu</p>
+                <p><span class="links__info--name">Nazwa szablonu</span> z <span class="links__info--name">Nazwa produktu</span></p>
                 <a-button type="primary">
                     <a-icon type="build" />
                     Powiąż
@@ -151,6 +154,17 @@ export default {
             box-shadow: 0px 3px 6px -4px #000000;
             box-shadow: 0px 6px 16px 0px #000000 80%;
             box-shadow: 0px 9px 28px 8px #000000 85%;
+            color: @gray-9;
+            font-weight: 400;
+
+            &--name {
+                font-weight: 600;
+            }
+
+            &--2 {
+                height: 40px;
+                justify-content: center;
+            }
 
         }
     }

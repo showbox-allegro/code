@@ -9,11 +9,12 @@
             </a-button>
         </div>
         <div class="links__search">
-            <a-input-search enter-button placeholder="Szukaj"/>
+            <a-input-search enter-button placeholder="Szukaj" v-model="query"/>
         </div>
+        <s-empty v-if="!filteredTemplates.length"></s-empty>
         <ul class="links__items">
             <li 
-                v-for="template in templates" 
+                v-for="template in filteredTemplates" 
                 :class="{'is-selected': template.id == selection}"
                 class="links__item" 
                 :key="template.id"
@@ -39,14 +40,19 @@
 </template>
 
 <script>
+import Empty from "../layout/Empty";
 
 export default {
     name: 'Templates',
     props: {
         selection: Number
     },
+    components: {
+        SEmpty: Empty
+    },
     data(){
         return {
+            query: "",
             templates: [
                 {
                     id: 1,
@@ -67,6 +73,15 @@ export default {
             ]
         }
     },
+    computed: {
+        filteredTemplates(){
+            return this.query 
+                ? 
+                this.templates.filter(p=>p.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1 )
+                : 
+                this.templates;
+        }
+    }
 
 }
 </script>

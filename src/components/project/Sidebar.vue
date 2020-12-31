@@ -53,26 +53,26 @@ export default {
         return {
             collapsed: false,
             list: [
-                // {
-                //     key: '1',
-                //     title: 'Nazwa powiązania',
-                // },
-                // {
-                //     key: '2',
-                //     title: 'Nazwa powiązania',
-                // },
-                // {
-                //     key: '3',
-                //     title: 'Nazwa powiązania',
-                // },
-                // {
-                //     key: '4',
-                //     title: 'Nazwa powiązania',
-                // },
-                // {
-                //     key: '5',
-                //     title: 'Nazwa powiązania',
-                // },
+                {
+                    key: '1',
+                    title: 'Nazwa powiązania',
+                },
+                {
+                    key: '2',
+                    title: 'Nazwa powiązania',
+                },
+                {
+                    key: '3',
+                    title: 'Nazwa powiązania',
+                },
+                {
+                    key: '4',
+                    title: 'Nazwa powiązania',
+                },
+                {
+                    key: '5',
+                    title: 'Nazwa powiązania',
+                },
             ],
         };
     },
@@ -199,16 +199,7 @@ export default {
             font-weight: 400;
         }
 
-        .ant-badge-count {
-            font-size: 10px;
-            font-weight: 600;
-            background: inherit;
-            box-shadow: 0 0 0 1px @gray-4;
-            min-width: 16px;
-            height: 16px;
-            line-height: 16px;
-            padding: 0 4px;
-        }
+
 
         .ant-menu {
             padding: 8px 16px;

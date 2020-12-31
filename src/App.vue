@@ -6,7 +6,10 @@
 			<s-header></s-header> 
 
 			<a-layout-content>
-			<s-projects v-if="view=='projects'"></s-projects>
+			<s-projects 
+				v-if="view=='projects'"
+				@editProject="view = 'project'"
+			></s-projects>
 			<s-project v-if="view=='project'"></s-project>
 			</a-layout-content>	
 
@@ -49,7 +52,7 @@ export default {
 	},
 	data(){
 		return {
-			view: "project"
+			view: "projects"
 		}
 	},
 	computed:{

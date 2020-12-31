@@ -7,7 +7,10 @@
         </div>
         <a-row :gutter="[16,16]">
             <a-col v-for="project in projects" :key="project.id" :span="6">
-                <s-project-card :project="project"></s-project-card>
+                <s-project-card 
+                    :project="project"
+                    @editProject="$emit('editProject',project)">
+                </s-project-card>
             </a-col>
             <a-col :span="6">
                 <s-empty-card></s-empty-card>
@@ -35,8 +38,7 @@ export default {
     computed:{
 		...mapState({
 			waiting: state => state.waiting,
-			projects: state => state.projects,
-			// paths: state => state.PathsModule.paths
+			projects: state => state.ProjectsModule.projects,
 		})
 	},
 	mounted(){
@@ -46,7 +48,7 @@ export default {
 			})
 	},
 	methods: {
-		...mapActions(["getProjects"]),
+        ...mapActions(["getProjects"]),
 	}
 
 }
