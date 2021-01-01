@@ -14,14 +14,14 @@
                     <a-menu-item @click="$emit('editProject')">
                         <span><a-icon type="edit" /> Edytuj</span>
                     </a-menu-item>
-                    <a-menu-item>
+                    <a-menu-item @click="$emit('copyProject')">
                         <span><a-icon type="copy" /> Duplikuj</span>
                     </a-menu-item>
-                    <a-menu-item>
-                        <span><a-icon type="code" /> Informacje</span>
+                    <a-menu-item @click="$emit('infoProject')">
+                        <span ><a-icon type="code" /> Informacje</span>
                     </a-menu-item>
                     <a-menu-divider />
-                    <a-menu-item>
+                    <a-menu-item @click="$emit('deleteProject')">
                         <span class="danger"><a-icon type="delete" /> Usuń</span>
                     </a-menu-item>
                 </a-menu>

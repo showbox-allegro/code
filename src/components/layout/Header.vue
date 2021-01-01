@@ -1,8 +1,8 @@
 <template>
     <a-layout-header class="header">
 
-        <img src="../../assets/logo.svg">
-        <a-input-search class="header__search" enter-button placeholder="Szukaj"/>
+        <img class="header__logo" @click = "$emit('goToProjects')" src="../../assets/logo.svg">
+        <a-input-search v-model="filter.query" class="header__search" enter-button placeholder="Szukaj"/>
         <a-dropdown>
             <a class="ant-dropdown-link" @click="e => e.preventDefault()">
                 <a-avatar :size="32" icon="user" />
@@ -27,6 +27,9 @@
 
 <script>
 export default {
+    props: {
+        filter: Object
+    }
     
 }
 </script>
@@ -40,6 +43,10 @@ export default {
         padding: 0px 24px;
         background-color: @gray-2;
         border-bottom: solid 1px #303030;
+
+        &__logo {
+            cursor: pointer;
+        }
 
         &__search {
             width: 320px;

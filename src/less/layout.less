@@ -16,6 +16,37 @@ main {
 
 .ant-modal-content {
     background-color: @gray-1;
+    border: solid 1px @gray-4;
+}
+
+.ant-modal-header {
+    background-color: @gray-1;
+    border-bottom-color: @gray-4;
+}
+
+.ant-modal-title {
+    color: @gray-9;
+    font-weight: 600;
+}
+
+.ant-modal-footer {
+    border-top-color: @gray-4;
+}
+
+.ant-modal-close {
+    color: @gray-7;
+
+    &:hover {
+        color: @primary-6;
+    }
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-title {
+    color: @gray-9;
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-content {
+    color: @gray-9;
 }
 
 .ant-tooltip {
@@ -45,6 +76,10 @@ main {
     background-color: @gray-1;
     color: @gray-9;
     border-color: @gray-5;
+
+    &::placeholder {
+        color: @gray-7;
+    }
 }
 
 .ant-checkbox-inner {
@@ -79,6 +114,17 @@ main {
     }
 }
 
+.ant-input-search {
+    &:hover {
+        .ant-input {
+            border-color: #f27c33;
+        }
+        .ant-input-search-button {
+            border-color: #f27c33;
+        }
+    }
+}
+
 .ant-input-search-button {
     background-color: @gray-1;
     border-color: @gray-5;
@@ -87,15 +133,8 @@ main {
     color: @gray-9;
 }
 
-.ant-btn-default {
-    background-color: @gray-1;
-    border-color: @gray-5;
-
-    &:hover,
-    &:focus {
-        background-color: @gray-1;
-    }
-}
+.ant-btn:not(.ant-btn-primary),
+.ant-btn-default,
 .ant-btn-dashed {
     background-color: @gray-1;
     border-color: @gray-5;

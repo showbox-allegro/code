@@ -1,21 +1,14 @@
 
 <template>
-    <div>   
-
-        
-
+    <div>         
         <s-sidebar     
             @openLinks="openLinks"
         />
 
         <div class="project__content">
-
             <s-edition></s-edition>
-
             <s-graphics></s-graphics>
-
         </div>
-
 
         <s-links 
             v-if="linksEditor"
@@ -38,6 +31,9 @@ export default {
         SEdition: Edition,
         SGraphics: Graphics,
         SLinks: Links
+    },
+    props: {
+        currentProject: Object
     },
     data(){
         return {

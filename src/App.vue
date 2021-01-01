@@ -3,14 +3,22 @@
 
 		<a-layout>
 
-			<s-header></s-header> 
+			<s-header 
+				:filter="filter"
+				@goToProjects = "view=='projects'"
+			/> 
 
 			<a-layout-content>
 			<s-projects 
 				v-if="view=='projects'"
-				@editProject="view = 'project'"
+				:query="filter.query"
+				@editProject="editProject($event)"
+				@createProject="createProject"
 			></s-projects>
-			<s-project v-if="view=='project'"></s-project>
+			<s-project 
+				v-if="view=='project'"
+				:currentProject = "currentProject"
+			/>
 			</a-layout-content>	
 
 
@@ -52,7 +60,17 @@ export default {
 	},
 	data(){
 		return {
-			view: "projects"
+			currentProject: {},
+			emptyProject: {
+				id: null,
+				name: "",
+				created: "",
+				updated: ""
+			},
+			view: "projects",
+			filter: {
+				query: ""
+			}
 		}
 	},
 	computed:{
@@ -63,7 +81,15 @@ export default {
 		})
 	},
 	methods: {
-		...mapMutations(["closeAlert"])
+		...mapMutations(["closeAlert"]),
+		editProject(project){
+			this.currentProject = project;
+			this.view = "project";
+		},
+		createProject(){
+			this.currentProject = this.emptyProject;
+			this.view = "project";
+		}
 	}
 }
 </script>
