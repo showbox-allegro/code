@@ -2,7 +2,26 @@
 <template>
     <div>   
         <div class="projects__header">
-            <h2>Projekty</h2>
+            <div class="projects__header-left">
+                <h2>Projekty </h2>
+                <span class="projects__header-number">({{projects.length}})</span>
+                <a-dropdown>
+                    <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+                        <p class="projects__header-sort">Sortuj wg <a-icon type="down" /></p>
+                    </a>
+                    <a-menu slot="overlay">
+                        <a-menu-item @click="sorters.sort='name'">
+                            <p>Nazwa</p>
+                        </a-menu-item>
+                        <a-menu-item @click="sorters.sort='created'">
+                            <p>Data utworzenia</p>
+                        </a-menu-item>
+                        <a-menu-item @click="sorters.sort='updated'">
+                            <p>Data edycji</p>
+                        </a-menu-item>
+                    </a-menu>
+                </a-dropdown>
+            </div>
             <a-button 
                 @click.native="$emit('createProject')" 
                 type="primary"
@@ -10,7 +29,7 @@
                 <a-icon type="plus" :style="{ width: '16px'}"/> Nowy projekt
             </a-button>
         </div>
-        <s-empty v-if="projects.length && !filteredProjects.length"></s-empty>
+        <s-empty v-if="projects.length && !filteredProjects.length" :size="'xl'"/>
         <a-row :gutter="[16,16]">
             <a-col v-for="project in filteredProjects" :key="project.id" :span="6">
                 <s-project-card 
@@ -22,7 +41,7 @@
                     @deleteProject="deleteProject(project)"
                 />
             </a-col>
-            <a-col v-if="!query" :span="6">
+            <a-col v-if="!sorters.query" :span="6">
                 <s-empty-card
                     @click.native="$emit('createProject')"
                 />
@@ -55,7 +74,7 @@ export default {
         SEmpty: Empty
     },
     props: {
-        query: String
+        sorters: Object
     },
     data(){
         return {
@@ -70,11 +89,25 @@ export default {
 			projects: state => state.ProjectsModule.projects,
         }),
         filteredProjects(){
-            return this.query 
-                ? 
-                this.projects.filter(p=>p.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1 )
-                : 
-                this.projects;
+            let filtered = this.projects; 
+
+            if(this.sorters.query){
+                filtered = this.projects.filter(p=>p.name.toLowerCase().indexOf(this.sorters.query.toLowerCase()) !== -1 );
+            }
+
+            if(this.sorters.sort=='name'){
+                filtered.sort((a, b) => a.name.localeCompare(b.name))
+            }
+
+            if(this.sorters.sort=='created'){
+                filtered.sort((a, b) => new Date(b.created).getTime()-new Date(a.created).getTime())
+            }
+
+            if(this.sorters.sort=='updated'){
+                filtered.sort((a, b) => new Date(b.updated).getTime()-new Date(a.updated).getTime())
+            }
+
+            return filtered
         }
 	},
 	mounted(){
@@ -122,6 +155,25 @@ export default {
             justify-content: space-between;
             align-items: center;
             margin: 24px 0;
+
+            &-left {
+                display: flex;
+                align-items: flex-end;
+            }
+
+            &-number {
+                margin-bottom: 4px;
+                margin-left: 8px;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            &-sort {
+                margin-bottom: 4px;
+                margin-left: 26px;
+                font-weight: 400;
+                color: @gray-9;
+            }
         }
     }
 </style>

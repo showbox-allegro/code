@@ -4,14 +4,16 @@
 		<a-layout>
 
 			<s-header 
-				:filter="filter"
+				:view="view"
+				:currentProject="currentProject"
+				:sorters="sorters"
 				@goToProjects = "view='projects'"
 			/> 
 
 			<a-layout-content>
 			<s-projects 
 				v-if="view=='projects'"
-				:query="filter.query"
+				:sorters="sorters"
 				@editProject="editProject($event)"
 				@createProject="createProject"
 			></s-projects>
@@ -68,8 +70,9 @@ export default {
 				updated: ""
 			},
 			view: "projects",
-			filter: {
-				query: ""
+			sorters: {
+				query: "",
+				sort: "name" //created, updated
 			}
 		}
 	},
