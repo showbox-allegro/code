@@ -5,7 +5,7 @@
 
 			<s-header 
 				:filter="filter"
-				@goToProjects = "view=='projects'"
+				@goToProjects = "view='projects'"
 			/> 
 
 			<a-layout-content>
