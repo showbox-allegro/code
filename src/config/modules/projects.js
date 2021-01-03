@@ -9,6 +9,7 @@ export default {
             state.projects = payload.projects;
         },
         addProject(state, payload){
+            payload.project.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
             state.projects.unshift(payload.project);
         },
         removeProject(state, payload){

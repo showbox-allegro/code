@@ -18,6 +18,21 @@
                     v-if="currentProject.links.length"
                     v-model="selection.link"
                     >
+                    <a-menu-item 
+                        :key="0" 
+                        @click="$emit('selectLink',0)" 
+                        class="sidebar__item"
+                    >
+                        <a-badge 
+                            class="sidebar__badge"
+                            :count="'1'" 
+                        />
+                        <span 
+                            class="sidebar__name" 
+                            >
+                            Wszystkie szablony x Wszystkie produkty
+                        </span>
+                    </a-menu-item>
                     <template v-for="(link, index) in currentProject.links">
                         <a-menu-item 
                             :key="link.id" 
@@ -26,7 +41,7 @@
                         >
                             <a-badge 
                                 class="sidebar__badge"
-                                :count="index+1" 
+                                :count="index+2" 
                             />
                             <span 
                                 class="sidebar__name" 
@@ -222,7 +237,7 @@ export default {
             border-radius: 6px;
             color: @gray-10;
 
-            &:first-child {
+            &-selected {
                 background-color: @primary-1 !important;
                 border: 1px solid @primary-7 !important;
 
@@ -232,7 +247,7 @@ export default {
                 }
             }
 
-            &-selected {
+            &.is-warning {
                 background-color: @gray-2 !important;
                 border: 1px solid #D89614 !important;
 

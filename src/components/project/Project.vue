@@ -11,10 +11,14 @@
         <div class="project__content">
             <s-edition
                 :selected="!!selection.link.length"
-                :temp="currentProject.templates.find(t=> t.id == currentLink.tempId)"
-                :prod="currentProject.products.find(p=> p.id == currentLink.prodId)"
+                :currentProject="currentProject"
+                :currentLink="currentLink"
             />
             <s-graphics
+                :selected="!!selection.link.length"
+                @exportSelectedGraphics="exportSelectedGraphics"
+                @exportAllCreations="exportAllCreations"
+                @exportAllLinks="exportAllLinks"
             />
         </div>
 
@@ -28,6 +32,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import Sidebar from "./Sidebar";
 import Edition from "./Edition";
 import Graphics from "./Graphics";
@@ -47,23 +52,45 @@ export default {
     data(){
         return {
             linksEditor: false,
-            currentLink: {},
             selection: {
                 link: []
             }
         }
     },
+    computed: {
+        currentLink(){
+            let selected = this.selection.link;
+            if (selected.length && selected[0]){
+                return this.currentProject.links.find(l=>l.id==selected[0])
+            } else {
+                return {}
+            }
+        }
+    },
     methods: {
+        ...mapMutations(["showAlert"]),
         openLinks(){
             this.linksEditor = true;
         },
         closeLinks(id) {
             this.linksEditor = false;
-            if(id) this.selectLink(id);
+            if(id || id===0) this.selectLink(id);
         },
         selectLink(id){
             this.selection.link=[id];
-            this.currentLink = this.currentProject.links.find(l=>l.id==id);
+            // this.currentLink = this.currentProject.links.find(l=>l.id==id);
+        },
+        exportSelectedGraphics(){
+            //TODO:
+            this.showAlert({text: 'Eksportowano zaznaczone grafiki', type: 'success'})
+        },
+        exportAllCreations(){
+            //TODO:
+            this.showAlert({text: 'Eksportowano wszystkie kreacje', type: 'success'})
+        },
+        exportAllLinks(){
+            //TODO:
+            this.showAlert({text: 'Eksportowano wszystkie Powiązania', type: 'success'})
         }
     }
  

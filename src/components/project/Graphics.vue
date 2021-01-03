@@ -1,10 +1,44 @@
 
 <template>
-    <div class="graphics box">   
-        <h3 class="box__title">Grafiki - todo</h3>
-        <div class="box__empty">
+    <div class="graphics scroll box">   
+        <div class="box__title">
+            <h4>Grafiki</h4>
+            <a-button type="default">
+                <a-dropdown>
+                    <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+                        Eksportuj <a-icon type="down" />
+                    </a>
+                    <a-menu slot="overlay">
+                        <a-menu-item @click="$emit('exportSelectedGraphics', selectedBanners)" :disabled="!selectedBanners.length">
+                            <p>Zaznaczone</p>
+                        </a-menu-item>
+                        <a-menu-item @click="$emit('exportAllCreations')">
+                            <p>Wszystkie kreacje</p>
+                        </a-menu-item>
+                        <a-menu-divider />
+                        <a-menu-item @click="$emit('exportAllLinks')">
+                            <p>Wszystkie Powiązania</p>
+                        </a-menu-item>
+                    </a-menu>
+                </a-dropdown>
+            </a-button>
+        </div>
+        <div v-if="!selected" class="box__empty">
             <p>Dodaj powiązania, aby rozpocząć! </p>
         </div>
+        <ul v-else class="box__main">
+            <li v-for="banner in banners" :key="banner.id" class="banner">
+                <div class="banner__header">
+                    <a-checkbox @change="toggleSelect(banner.id)" class="banner__checkbox">{{ banner.size }}</a-checkbox>
+                    <a-button class="banner__btn" type="default">
+                        <a-icon type="edit" />
+                    </a-button>
+                </div>
+                <div class="banner__image">
+                    <img src="@/assets/graphics/banner.png"/>
+                </div>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -12,11 +46,41 @@
 
 export default {
     name: 'Graphics',
+    props: {
+        selected: Boolean,
+    },
     data(){
         return {
-
+            selectedBanners: [],
+            banners: [
+                {
+                    id: 1,
+                    size: "405x136",
+                    img: "banner.png"
+                },
+                {
+                    id: 2,
+                    size: "543x361",
+                    img: "banner.png"
+                },
+                {
+                    id: 3,
+                    size: "438x61",
+                    img: "banner.png"
+                }
+            ]
         }
     },
+    methods: {
+        toggleSelect(id){
+            const index = this.selectedBanners.findIndex(l => l === id);
+            if (index !== -1) {
+                this.selectedBanners.splice(index, 1);
+            } else {
+                this.selectedBanners.push(id);
+            }
+        }
+    }
  
 }
 </script>
@@ -24,5 +88,8 @@ export default {
 <style lang="less">
     .graphics {
         width: calc(50% - 8px);
+        height: calc(100vh - 64px - 16px - 24px);
+
+
     }
 </style>

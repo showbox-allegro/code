@@ -24,6 +24,25 @@
         </div>
         <s-empty v-if="query && !filteredLinks.length"/>
         <ul v-else class="links__items">
+            <li
+                v-if="currentProject.links.length"
+                class="links__item" 
+            >
+                <a-checkbox @change="toggleSelectLink(0)">
+                    <a-badge class="items__badge" :count="1" />
+                    Wszystkie szablony x Wszystkie produkty
+                </a-checkbox>
+                <a-dropdown>
+                    <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+                        <a-icon type="more" />
+                    </a>
+                    <a-menu slot="overlay">
+                        <a-menu-item @click="$emit('editLink',0)">
+                            <span><a-icon type="edit" /> Edytuj</span>
+                        </a-menu-item>
+                    </a-menu>
+                </a-dropdown>
+            </li>  
             <s-item 
                 v-for="(link, index) in filteredLinks" 
                 class="links__item" 

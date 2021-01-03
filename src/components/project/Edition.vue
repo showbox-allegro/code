@@ -1,113 +1,54 @@
 
 <template>
     <div class="edition scroll box">   
-        <h3 class="box__title">Edycja - statyczny</h3>
-        <div v-if="!selected" class="box__empty">
+        <h4 class="box__title">Edycja</h4>
+        <div v-if="!currentLink || !selected" class="box__empty">
             <p>Dodaj powiązania, aby rozpocząć! </p>
         </div>
         <div v-else class="box__main">
+            <s-temp
+                v-if="currentLink.tempId"
+                :temp="currentProject.templates.find(t=> t.id == currentLink.tempId)"
+            />
+            <template v-else>
+                <s-temp 
+                    v-for="temp in currentProject.templates"
+                    :key="`temp ${temp.id}`"
+                    :temp="temp"
+                />
+            </template>
 
-            <p class="edition__header"> {{ temp.name }} </p>
+            <s-prod
+                v-if="currentLink.prodId"
+                :prod="currentProject.products.find(t=> t.id == currentLink.prodId)"
+            />
+            <template v-else>
+                <s-prod 
+                    v-for="prod in currentProject.products"
+                    :key="`prod ${prod.id}`"
+                    :prod="prod"
+                />
+            </template>
 
-            <div class="edition__font">
-
-                <div class="edition__font-size">
-                    <p class="input__label">Font Family</p>
-                    <a-input class="edition__input" placeholder="Inter">
-                        <a-icon slot="prefix" type="font-size" />
-                    </a-input>
-                </div>
-
-                <div class="edition__font-color">
-                    <p class="input__label">Font Color</p>
-                    <a-input class="edition__input" placeholder="#FF5A00">
-                        <a-icon slot="prefix" type="font-colors" style="color:#FF5A00"/>
-                    </a-input>
-                </div>
-
-            </div>
-
-            <p class="input__label">Background Color</p>
-            <a-input class="edition__input" placeholder="#FF5A00">
-                <a-icon slot="prefix" type="bg-colors" style="color:#FF5A00"/>
-            </a-input>
-
-
-            <p class="input__label">Tekst - Jedna linia</p>
-            <a-input class="edition__input" placeholder="Wzmocnij odporność przed jesienią!"/>
-
-            <p class="input__label">Tekst - Wiele linii</p>
-            <a-textarea :rows="2" class="edition__input" placeholder="Wzmocnij odporność przed jesienią!"/>
-
-            <p class="input__label">Obrazek 1</p>
-            <s-temp-upload />
-
-            <p class="input__label">Select</p>
-            <a-select class="edition__select">
-                <a-select-option v-for="i in 10" :key="i" >
-                    Opcja {{ i }}
-                </a-select-option>
-            </a-select>
-
-            <a-divider />
-
-            <p class="edition__header"> {{ prod.name }} </p>
-
-            <div class="edition__font">
-
-                <div class="edition__font-size">
-                    <p class="input__label">Font Family</p>
-                    <a-input class="edition__input" placeholder="Inter">
-                        <a-icon slot="prefix" type="font-size" />
-                    </a-input>
-                </div>
-
-                <div class="edition__font-color">
-                    <p class="input__label">Font Color</p>
-                    <a-input class="edition__input" placeholder="#FF5A00">
-                        <a-icon slot="prefix" type="font-colors" style="color:#FF5A00"/>
-                    </a-input>
-                </div>
-
-            </div>
-
-            <p class="input__label">Background Color</p>
-            <a-input class="edition__input" placeholder="#FF5A00">
-                <a-icon slot="prefix" type="bg-colors" style="color:#FF5A00"/>
-            </a-input>
-
-
-            <p class="input__label">Tekst - Jedna linia</p>
-            <a-input class="edition__input" placeholder="Wzmocnij odporność przed jesienią!"/>
-
-            <p class="input__label">Tekst - Wiele linii</p>
-            <a-textarea :rows="2" class="edition__input" placeholder="Wzmocnij odporność przed jesienią!"/>
-
-            <p class="input__label">Obrazek 1</p>
-            <s-temp-upload />
-
-            <p class="input__label">Select</p>
-            <a-select class="edition__select">
-                <a-select-option v-for="i in 10" :key="i" >
-                    Opcja {{ i }}
-                </a-select-option>
-            </a-select>
+            
         </div>
     </div>
 </template>
 
 <script>
-import TempUpload from "./TempUpload";
+import Temp from "./Temp";
+import Prod from "./Prod";
 
 export default {
     name: 'Edition',
     components: {
-        STempUpload: TempUpload
+        STemp: Temp,
+        SProd: Prod
     },
     props: {
         selected: Boolean,
-        temp: Object,
-        prod: Object
+        currentProject: Object,
+        currentLink: Object
     },
     data(){
         return {
@@ -154,6 +95,11 @@ export default {
             width: 100%;
         }
 
+        & &__product:last-child {
+            .ant-divider {
+                display: none;
+            }
+        }
 
     }
 </style>

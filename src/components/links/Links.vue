@@ -11,22 +11,22 @@
         </div>
         <div class="links__main">
             <s-templates 
-                :selection = "selection.template"
-                :templates = "currentProject.templates"
-                @selectTemplate = "selectTemplate"
-                @deleteTemplate = "deleteTemplate"
+                :selection="selection.template"
+                :templates="currentProject.templates"
+                @selectTemplate="selectTemplate"
+                @deleteTemplate="confirmAndDeleteTemplate"
                 @addTemplates="addTemplates"
             />
             <s-products 
                 :selection="selection.product"
                 :products="currentProject.products"
                 @selectProduct="selectProduct"
-                @deleteProduct="deleteProduct"
+                @deleteProduct="confirmAndDeleteProduct"
                 @addProducts="addProducts"
                 @addEmptyProducts="addEmptyProducts"
             />
             <s-items
-                :currentProject = "currentProject"
+                :currentProject="currentProject"
                 @editLink="editLink"
                 @resetSettings="resetSettings"
                 @deleteLink="deleteLink"
@@ -96,6 +96,7 @@ export default {
                 return ""
             }
         },
+
         linkReady(){
             return this.selection.template && this.selection.product
         },
@@ -108,12 +109,24 @@ export default {
     },
     methods: {
         ...mapMutations(["showAlert"]),
-        ...mapActions(["updateProject"]),
+        ...mapActions(["updateProject","addProject"]),
         selectTemplate(id) {
             this.selection.template == id ? this.selection.template = null : this.selection.template = id;
         },
         selectProduct(id) {
             this.selection.product == id ? this.selection.product = null : this.selection.product = id;
+        },
+        confirmAndDeleteTemplate(id){
+            Modal.confirm({
+                title: 'Usunąć szablon?',
+                content: 'Utracisz wszystkie powiązania, w których wykorzystano szablon',
+                cancelText: 'Anuluj',
+                okText: 'Usuń',
+                icon: 'exclamation-circle',
+                onOk: () => {
+                    this.deleteTemplate(id);
+                }
+            }); 
         },
         deleteTemplate(id) {
             const index = this.currentProject.templates.findIndex(t => t.id === id);
@@ -125,6 +138,24 @@ export default {
             if(this.selection.template==id){
                 this.selection.template=null;
             }
+
+            this.currentProject.links.forEach((link,i)=>{
+                if (link.tempId==id) {
+                    this.currentProject.links.splice(i, 1);
+                }
+            });
+        },
+        confirmAndDeleteProduct(id){
+            Modal.confirm({
+                title: 'Usunąć produkt?',
+                content: 'Utracisz wszystkie powiązania, w których wykorzystano produkt',
+                cancelText: 'Anuluj',
+                okText: 'Usuń',
+                icon: 'exclamation-circle',
+                onOk: () => {
+                    this.deleteProduct(id);
+                }
+            }); 
         },
         deleteProduct(id) {
             const index = this.currentProject.products.findIndex(p => p.id === id);
@@ -136,6 +167,12 @@ export default {
             if(this.selection.product==id){
                 this.selection.product=null;
             }
+
+            this.currentProject.links.forEach((link,i)=>{
+                if (link.prodId==id) {
+                    this.currentProject.links.splice(i, 1);
+                }
+            });
         },
         deleteLink(id) {
             const index = this.currentProject.links.findIndex(l => l.id === id);
@@ -213,7 +250,11 @@ export default {
         },
         saveProject(){
             //TODO:
-            this.updateProject(this.currentProject);
+            if(this.currentProject.id){
+                this.updateProject(this.currentProject);
+            } else {
+                this.addProject(this.currentProject);
+            }
         }
     }
  
