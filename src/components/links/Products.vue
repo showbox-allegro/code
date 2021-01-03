@@ -21,7 +21,7 @@
         <div class="links__search">
             <a-input-search enter-button placeholder="Szukaj" v-model="query"/>
         </div>
-        <s-empty v-if="query && !filteredProducts.length"></s-empty>
+        <s-empty v-if="query && !filteredProducts.length"/>
         <ul v-else class="links__items">
             <s-product 
                 v-for="product in filteredProducts" 

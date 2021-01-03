@@ -34,14 +34,12 @@
             {
                 "id": 1,
                 "tempId": 1,
-                "prodId": 2,
-                "name": "Szablon 1 x Produkt 2"
+                "prodId": 2
             },
             {
                 "id": 2,
                 "tempId": 3,
-                "prodId": 1,
-                "name": "Szablon 3 x Produkt 1"                
+                "prodId": 1           
             }
         ]
     },
@@ -80,14 +78,12 @@
             {
                 "id": 1,
                 "tempId": 1,
-                "prodId": 2,
-                "name": "Szablon 1 x Produkt 2"
+                "prodId": 2
             },
             {
                 "id": 2,
                 "tempId": 3,
-                "prodId": 1,
-                "name": "Szablon 3 x Produkt 1"                
+                "prodId": 1 
             }
         ]
     }

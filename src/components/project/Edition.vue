@@ -2,8 +2,13 @@
 <template>
     <div class="edition box">   
         <h3 class="box__title">Edycja</h3>
-        <div class="box__empty">
+        <div v-if="!selected" class="box__empty">
             <p>Dodaj powiązania, aby rozpocząć! </p>
+        </div>
+        <div v-else class="box__main">
+            TODO:
+            <p> {{ temp.name }} </p>
+            <p> {{ prod.name }} </p>
         </div>
     </div>
 </template>
@@ -12,6 +17,11 @@
 
 export default {
     name: 'Edition',
+    props: {
+        selected: Boolean,
+        temp: Object,
+        prod: Object
+    },
     data(){
         return {
 

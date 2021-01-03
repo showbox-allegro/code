@@ -1,7 +1,5 @@
 <template>
     <li 
-        class="links__item" 
-        :key="template.id"
         @click="selectTemplate"
     >
         <p v-if="!editMode">{{ template.name }}</p>

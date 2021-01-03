@@ -110,10 +110,12 @@ export default {
         }
 	},
 	mounted(){
-		this.getProjects()
+		if (!this.projects.length) {
+            this.getProjects()
 			.then(() => {
 				console.log('Projekty załadowane');
-			})
+            })
+        }
 	},
 	methods: {
         ...mapMutations(["showAlert"]),

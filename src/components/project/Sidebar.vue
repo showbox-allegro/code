@@ -1,44 +1,52 @@
 <template>
-    <div class="sidebar" :class="{'is-collapsed': collapsed}">
-        <div class="sidebar__header" @click="toggleCollapsed" >
-            <p v-if="!collapsed">Powiązania</p>
-            <a-icon 
-                :type="collapsed ? 'menu-unfold' : 'menu-fold'" 
-                :style="{fontSize: '20px'}"
-            />
-        </div>
-        <div class="sidebar__content">
-            <a-menu
-                :default-selected-keys="['1']"
-                :default-open-keys="['2']"
-                mode="inline"
-                theme="dark"
-                :inline-collapsed="collapsed"
-                class="sidebar__menu"
-                v-if="list.length"
-                >
-                <template v-for="(link, index) in currentProject.links">
-                    <a-menu-item :key="link.id" class="sidebar__item">
-                        <a-badge 
-                            class="sidebar__badge"
-                            :count="index+1" 
-                        />
-                        <span 
-                            class="sidebar__name" 
-                            >
-                            {{ link.name }}
-                        </span>
-                    </a-menu-item>
-                </template>
-            </a-menu>
-            <div class="sidebar__empty" @click="$emit('openLinks')" v-else>
-                <p v-if="!collapsed">Dodaj powiązania, aby rozpocząć! </p>
+    <div class="sidebar" :class="{'is-collapsed': collapsed}" @click="clickOutside">
+        <div class="sidebar__main">
+            <div class="sidebar__header" @click="toggleCollapsed" >
+                <p v-if="!collapsed">Powiązania</p>
+                <a-icon 
+                    @click="toggleCollapsed"
+                    :type="collapsed ? 'menu-unfold' : 'menu-fold'" 
+                    :style="{fontSize: '20px'}"
+                />
             </div>
-            <div class="sidebar__bottom">
-                <a-button class="sidebar__bottom--btn" type="primary" @click="$emit('openLinks')">
-                    <a-icon type="plus"></a-icon> 
-                    <span v-if="!collapsed">Dodaj / Edytuj Powiązania</span>
-                </a-button>
+            <div class="sidebar__content">
+                <a-menu
+                    mode="inline"
+                    theme="dark"
+                    :inline-collapsed="collapsed"
+                    class="sidebar__menu"
+                    v-if="currentProject.links.length"
+                    v-model="selection.link"
+                    >
+                    <template v-for="(link, index) in currentProject.links">
+                        <a-menu-item 
+                            :key="link.id" 
+                            @click="$emit('selectLink',link.id)" 
+                            class="sidebar__item"
+                        >
+                            <a-badge 
+                                class="sidebar__badge"
+                                :count="index+1" 
+                            />
+                            <span 
+                                class="sidebar__name" 
+                                >
+                                {{ currentProject.templates.find(t=> t.id == link.tempId).name }}
+                                x
+                                {{ currentProject.products.find(p=> p.id == link.prodId).name }}
+                            </span>
+                        </a-menu-item>
+                    </template>
+                </a-menu>
+                <div class="sidebar__empty" @click="$emit('openLinks')" v-else>
+                    <p v-if="!collapsed">Dodaj powiązania, aby rozpocząć! </p>
+                </div>
+                <div class="sidebar__bottom">
+                    <a-button class="sidebar__bottom--btn" type="primary" @click="$emit('openLinks')">
+                        <a-icon type="plus"></a-icon> 
+                        <span v-if="!collapsed">Dodaj / Edytuj Powiązania</span>
+                    </a-button>
+                </div>
             </div>
         </div>
     </div>
@@ -50,39 +58,23 @@
 export default {
     name: 'Sidebar',
     props: {
-        currentProject: Object
+        currentProject: Object,
+        selection: Object
     },
     data() {
         return {
             collapsed: false,
-            list: [
-                {
-                    key: '1',
-                    title: 'Nazwa powiązania',
-                },
-                {
-                    key: '2',
-                    title: 'Nazwa powiązania',
-                },
-                {
-                    key: '3',
-                    title: 'Nazwa powiązania',
-                },
-                {
-                    key: '4',
-                    title: 'Nazwa powiązania',
-                },
-                {
-                    key: '5',
-                    title: 'Nazwa powiązania',
-                },
-            ],
         };
     },
     methods: {
         toggleCollapsed() {
             this.collapsed = !this.collapsed;
         },
+        clickOutside(e){
+            if (!e.target.closest('.sidebar__main')){
+                this.toggleCollapsed();
+            }
+        }
     },
 }
 </script>
@@ -121,6 +113,10 @@ export default {
                 left: 64px;
                 opacity: 0;
             }
+        }
+
+        &__main {
+            height: 100%;
         }
 
 

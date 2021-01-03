@@ -6,7 +6,7 @@
 
             <div class="header__project" v-if="view == 'project' ">
                 <a-input
-                    v-model="name" 
+                    v-model="currentProject.name" 
                     class="header__search" 
                     enter-button 
                     placeholder="Mój nowy projekt"

@@ -1,7 +1,5 @@
 <template>
     <li 
-        class="links__item" 
-        :key="product.id"
         @click="selectProduct"
     >
         <div class="products__info">

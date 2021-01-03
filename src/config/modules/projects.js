@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export default {
     state: {
         projects: [],
@@ -23,6 +25,13 @@ export default {
             copy.name = copy.name + "(1)";
             copy.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
             state.projects.unshift(copy);
+        },
+        updateProject(state, payload){
+            const index =state.projects.findIndex(p => p.id === payload.project.id);
+
+            if (index !== -1) {
+                Vue.set(state.projects, index, payload.project);
+            }
         }
     },
     actions: {
@@ -55,6 +64,12 @@ export default {
             rootState.waiting = true;
             commit("duplicateProject", { project });
             commit("showAlert", { text: "Projekt został zduplikowany", type: "success"});
+            rootState.waiting = false;
+        },
+        updateProject({commit,rootState},project){
+            rootState.waiting = true;
+            commit("updateProject", { project });
+            commit("showAlert", { text: "Pomyślnie zapisano projekt", type: "success"});
             rootState.waiting = false;
         }
     },

@@ -3,12 +3,19 @@
     <div>         
         <s-sidebar     
             @openLinks="openLinks"
+            @selectLink="selectLink"
             :currentProject="currentProject"
+            :selection="selection"
         />
 
         <div class="project__content">
-            <s-edition></s-edition>
-            <s-graphics></s-graphics>
+            <s-edition
+                :selected="!!selection.link.length"
+                :temp="currentProject.templates.find(t=> t.id == currentLink.tempId)"
+                :prod="currentProject.products.find(p=> p.id == currentLink.prodId)"
+            />
+            <s-graphics
+            />
         </div>
 
         <s-links 
@@ -39,15 +46,24 @@ export default {
     },
     data(){
         return {
-            linksEditor: false
+            linksEditor: false,
+            currentLink: {},
+            selection: {
+                link: []
+            }
         }
     },
     methods: {
         openLinks(){
             this.linksEditor = true;
         },
-        closeLinks() {
+        closeLinks(id) {
             this.linksEditor = false;
+            if(id) this.selectLink(id);
+        },
+        selectLink(id){
+            this.selection.link=[id];
+            this.currentLink = this.currentProject.links.find(l=>l.id==id);
         }
     }
  

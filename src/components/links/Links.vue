@@ -26,7 +26,8 @@
                 @addEmptyProducts="addEmptyProducts"
             />
             <s-items
-                :links = "currentProject.links"
+                :currentProject = "currentProject"
+                @editLink="editLink"
                 @resetSettings="resetSettings"
                 @deleteLink="deleteLink"
             />
@@ -46,13 +47,13 @@
             </div>
         </div>
         <div class="links__bottom">
-            <a-button type="primary" @click="$emit('closeLinks')">Zapisz i zamknij</a-button>
+            <a-button type="primary" @click="saveAndClose">Zapisz i zamknij</a-button>
         </div>
     </div>
 </template>
 
 <script>
-// import Sidebar from "./Sidebar";
+import { mapActions } from "vuex";
 import { Modal } from 'ant-design-vue';
 import Templates from "./Templates";
 import Products from "./Products";
@@ -61,7 +62,6 @@ import Items from "./Items";
 export default {
     name: 'Links',
     components: {
-    //     SSidebar: Sidebar,
         STemplates: Templates,
         SProducts: Products,
         SItems: Items
@@ -106,6 +106,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(["updateProject"]),
         selectTemplate(id) {
             this.selection.template == id ? this.selection.template = null : this.selection.template = id;
         },
@@ -147,7 +148,6 @@ export default {
                 id: newLinkId,
                 tempId: this.selection.template,
                 prodId: this.selection.product,
-                name: `${this.selectedTemplate} x ${this.selectedProduct}`
             }
             this.currentProject.links.push(newLink);
             this.selection = {                
@@ -175,6 +175,11 @@ export default {
         addTemplates(templates){
             this.currentProject.templates = this.currentProject.templates.concat(templates);
         },
+        editLink(id){
+            this.saveProject();
+            this.$emit('closeLinks',id);
+
+        },
         resetSettings(){
             Modal.confirm({
                 title: 'Zresetować ustawienia?',
@@ -183,9 +188,20 @@ export default {
                 okText: 'Resetuj',
                 icon: 'exclamation-circle',
                 onOk: () => {
-                    // this.removeProject(project)
+                    //TODO:
                 }
             }); 
+        },
+        saveAndClose(){
+            this.saveProject(this.currentProject);
+            this.$emit('closeLinks');
+        },
+        autoSaveProject(){
+            //TODO:
+        },
+        saveProject(){
+            //TODO:
+            this.updateProject(this.currentProject);
         }
     }
  
