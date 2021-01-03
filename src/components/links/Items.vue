@@ -24,13 +24,13 @@
         </div>
         <ul class="links__items">
             <li 
-                v-for="template in 4" 
+                v-for="(link, index) in links" 
                 class="links__item" 
-                :key="template"
+                :key="link.id"
             >
                 <a-checkbox>
-                    <a-badge class="items__badge" :count="template" />
-                    Nazwa powiązania
+                    <a-badge class="items__badge" :count="index + 1" />
+                    {{ link.name }}
                 </a-checkbox>
                 <a-dropdown>
                     <a class="ant-dropdown-link" @click="e => e.preventDefault()">
@@ -38,12 +38,12 @@
                     </a>
                     <a-menu slot="overlay">
                         <a-menu-item>
-                            <span><a-icon type="edit" /> Zmień nazwę</span>
+                            <span><a-icon type="edit" /> Edytuj</span>
                         </a-menu-item>
-                        <a-menu-item>
+                        <a-menu-item @click="$emit('resetSetting')">
                             <span class="danger"><a-icon type="sync" /> Resetuj</span>
                         </a-menu-item>
-                        <a-menu-item>
+                        <a-menu-item @click="$emit('deleteLink',link.id)">
                             <span><a-icon type="delete" /> Usuń</span>
                         </a-menu-item>
                     </a-menu>
@@ -62,6 +62,9 @@ export default {
 
         }
     },
+    props: {
+        links: Array
+    }
  
 }
 </script>

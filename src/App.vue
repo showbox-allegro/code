@@ -67,7 +67,10 @@ export default {
 				id: null,
 				name: "",
 				created: "",
-				updated: ""
+				updated: "",
+				templates: [],
+				products: [],
+				links: []
 			},
 			view: "projects",
 			sorters: {

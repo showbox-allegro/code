@@ -3,7 +3,7 @@
     <div class="templates">   
         <div class="title">
             <h3>Szablony</h3>
-            <a-button type="dashed">
+            <a-button type="dashed" @click="addTemplateModal=true">
                 <a-icon type="plus"/>
                 Dodaj
             </a-button>
@@ -11,64 +11,59 @@
         <div class="links__search">
             <a-input-search enter-button placeholder="Szukaj" v-model="query"/>
         </div>
-        <s-empty v-if="!filteredTemplates.length"></s-empty>
+        <s-empty v-if="query && !filteredTemplates.length"></s-empty>
         <ul class="links__items">
-            <li 
+            <s-template 
                 v-for="template in filteredTemplates" 
+                :template="template"
                 :class="{'is-selected': template.id == selection}"
                 class="links__item" 
                 :key="template.id"
-                @click="$emit('selectTemplate', template.id)"
-            >
-                Nazwa szablonu
-                <a-dropdown>
-                    <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-                        <a-icon type="more" />
-                    </a>
-                    <a-menu slot="overlay">
-                        <a-menu-item>
-                            <span><a-icon type="edit" /> Zmień nazwę</span>
-                        </a-menu-item>
-                        <a-menu-item>
-                            <span><a-icon type="delete" /> Usuń</span>
-                        </a-menu-item>
-                    </a-menu>
-                </a-dropdown>
-            </li>
+                @selectTemplate="$emit('selectTemplate', template.id)"
+                @deleteTemplate="$emit('deleteTemplate', template.id)"
+            />
         </ul>
+        <s-add-template 
+            v-if="addTemplateModal"
+            :templatesToAdd= "templatesToAdd"
+            @addTemplates = "addTemplates"
+            @closeAddTemplateModal = "addTemplateModal = false"
+        />
     </div>
 </template>
 
 <script>
 import Empty from "../layout/Empty";
+import Template from "./Template";
+import AddTemplate from "./AddTemplate";
 
 export default {
     name: 'Templates',
     props: {
-        selection: Number
+        selection: Number,
+        templates: Array
     },
     components: {
+        STemplate: Template,
+        SAddTemplate: AddTemplate,
         SEmpty: Empty
     },
     data(){
         return {
             query: "",
-            templates: [
+            addTemplateModal: false,
+            templatesToAdd: [
                 {
-                    id: 1,
-                    name: "Nazwa szablonu"
+                    "id": 1,
+                    "name": "Szablon 1"
                 },
                 {
-                    id: 2,
-                    name: "Nazwa szablonu"
+                    "id": 2,
+                    "name": "Szablon 2"
                 },
                 {
-                    id: 3,
-                    name: "Nazwa szablonu"
-                },
-                {
-                    id: 4,
-                    name: "Nazwa szablonu"
+                    "id": 3,
+                    "name": "Szablon 3"
                 }
             ]
         }
@@ -81,6 +76,12 @@ export default {
                 : 
                 this.templates;
         }
+    },
+    methods: {
+        addTemplates(){
+            this.addTemplateModal = false;
+            this.$emit('addTemplates',this.templatesToAdd);
+        } 
     }
 
 }

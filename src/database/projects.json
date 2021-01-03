@@ -3,12 +3,92 @@
         "id": 1,
         "name": "Black Friday 2020",
         "created": "2020-11-25T00:00:00",
-        "updated": "2020-11-20T00:00:00"
+        "updated": "2020-11-20T00:00:00",
+        "templates": [
+            {
+                "id": 1,
+                "name": "Szablon 1"
+            },
+            {
+                "id": 2,
+                "name": "Szablon 2"
+            },
+            {
+                "id": 3,
+                "name": "Szablon 3"
+            }
+        ],
+        "products": [
+            {
+                "id": 1,
+                "name": "Produkt 1",
+                "image": "pills.png"
+            },
+            {
+                "id": 2,
+                "name": "Produkt 2",
+                "image": "pills.png"
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "tempId": 1,
+                "prodId": 2,
+                "name": "Szablon 1 x Produkt 2"
+            },
+            {
+                "id": 2,
+                "tempId": 3,
+                "prodId": 1,
+                "name": "Szablon 3 x Produkt 1"                
+            }
+        ]
     },
     {
         "id": 2,
         "name": "Black Friday 2019",
         "created": "2020-11-20T00:00:00",
-        "updated": "2020-11-20T00:00:00"
+        "updated": "2020-11-20T00:00:00",
+        "templates": [
+            {
+                "id": 1,
+                "name": "Szablon 1"
+            },
+            {
+                "id": 2,
+                "name": "Szablon 2"
+            },
+            {
+                "id": 3,
+                "name": "Szablon 3"
+            }
+        ],
+        "products": [
+            {
+                "id": 1,
+                "name": "Produkt 1",
+                "image": "pills.png"
+            },
+            {
+                "id": 2,
+                "name": "Produkt 2",
+                "image": "pills.png"
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "tempId": 1,
+                "prodId": 2,
+                "name": "Szablon 1 x Produkt 2"
+            },
+            {
+                "id": 2,
+                "tempId": 3,
+                "prodId": 1,
+                "name": "Szablon 3 x Produkt 1"                
+            }
+        ]
     }
 ]

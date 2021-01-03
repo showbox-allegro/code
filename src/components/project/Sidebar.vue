@@ -17,16 +17,16 @@
                 class="sidebar__menu"
                 v-if="list.length"
                 >
-                <template v-for="item in list">
-                    <a-menu-item :key="item.key" class="sidebar__item">
+                <template v-for="(link, index) in currentProject.links">
+                    <a-menu-item :key="link.id" class="sidebar__item">
                         <a-badge 
                             class="sidebar__badge"
-                            :count="item.key" 
+                            :count="index+1" 
                         />
                         <span 
                             class="sidebar__name" 
                             >
-                            {{ item.title }}
+                            {{ link.name }}
                         </span>
                     </a-menu-item>
                 </template>
@@ -48,7 +48,10 @@
 <script>
 
 export default {
-
+    name: 'Sidebar',
+    props: {
+        currentProject: Object
+    },
     data() {
         return {
             collapsed: false,

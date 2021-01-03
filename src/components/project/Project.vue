@@ -3,6 +3,7 @@
     <div>         
         <s-sidebar     
             @openLinks="openLinks"
+            :currentProject="currentProject"
         />
 
         <div class="project__content">
@@ -13,6 +14,7 @@
         <s-links 
             v-if="linksEditor"
             @closeLinks="closeLinks"
+            :currentProject="currentProject"
         />
 
     </div>

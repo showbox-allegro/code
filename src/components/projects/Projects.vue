@@ -78,7 +78,6 @@ export default {
     },
     data(){
         return {
-            deleteModal: false,
             infoModal: false,
             infoData: {}
         }

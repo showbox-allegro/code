@@ -11,20 +11,35 @@
         </div>
         <div class="links__main">
             <s-templates 
-                :selection="selection.template"
-                @selectTemplate="selectTemplate"
-            ></s-templates>
+                :selection = "selection.template"
+                :templates = "currentProject.templates"
+                @selectTemplate = "selectTemplate"
+                @deleteTemplate = "deleteTemplate"
+                @addTemplates="addTemplates"
+            />
             <s-products 
                 :selection="selection.product"
+                :products="currentProject.products"
                 @selectProduct="selectProduct"
-            ></s-products>
-            <s-items></s-items>
-            <div class="links__info links__info--2" v-if="!linkReady">
-                <p>Dodaj Szablony i Produkty, aby utworzyć powiązanie</p>
+                @deleteProduct="deleteProduct"
+                @addProducts="addProducts"
+                @addEmptyProducts="addEmptyProducts"
+            />
+            <s-items
+                :links = "currentProject.links"
+                @resetSettings="resetSettings"
+                @deleteLink="deleteLink"
+            />
+            <div class="links__info links__info--2" v-if="infoText">
+                <p>{{ infoText }}</p>
             </div>
             <div class="links__info" v-if="linkReady">
-                <p><span class="links__info--name">Nazwa szablonu</span> z <span class="links__info--name">Nazwa produktu</span></p>
-                <a-button type="primary">
+                <p>
+                    <span class="links__info--name"> {{ selectedTemplate }} </span> 
+                    z 
+                    <span class="links__info--name"> {{ selectedProduct }} </span>
+                </p>
+                <a-button @click="makeLink" type="primary">
                     <a-icon type="build" />
                     Powiąż
                 </a-button>
@@ -38,6 +53,7 @@
 
 <script>
 // import Sidebar from "./Sidebar";
+import { Modal } from 'ant-design-vue';
 import Templates from "./Templates";
 import Products from "./Products";
 import Items from "./Items";
@@ -50,6 +66,9 @@ export default {
         SProducts: Products,
         SItems: Items
     },
+    props: {
+        currentProject: Object
+    },
     data(){
         return {
             selection: {
@@ -59,16 +78,114 @@ export default {
         }
     },
     computed: {
+        infoText(){
+            if(!this.currentProject.templates.length && !this.currentProject.products.length){
+                return "Dodaj Szablony i Produkty, aby utworzyć powiązanie"
+            } else if(!this.currentProject.templates.length){
+                return "Dodaj Szablony, aby utworzyć powiązanie"
+            } else if (!this.currentProject.products.length) {
+                return "Dodaj Produkty, aby utworzyć powiązanie"
+            } else if (!this.selection.template && !this.selection.product) {
+                return "Zaznacz Szablon i Produkt, aby utworzyć powiązanie"
+            } else if (!this.selection.template) {
+                return "Zaznacz Szablon, aby utworzyć powiązanie z wybranym produktem"
+            } else if (!this.selection.product) {
+                return "Zaznacz Produkt, aby utworzyć powiązanie z wybranym szablonem"
+            } else {
+                return ""
+            }
+        },
         linkReady(){
             return this.selection.template && this.selection.product
+        },
+        selectedTemplate(){
+            return this.selection.template ? this.currentProject.templates.find(t=> t.id == this.selection.template).name : ""
+        },
+        selectedProduct(){
+            return this.selection.product ? this.currentProject.products.find(t=> t.id == this.selection.product).name : ""
         }
     },
     methods: {
         selectTemplate(id) {
-            this.selection.template = id;
+            this.selection.template == id ? this.selection.template = null : this.selection.template = id;
         },
         selectProduct(id) {
-            this.selection.product = id;
+            this.selection.product == id ? this.selection.product = null : this.selection.product = id;
+        },
+        deleteTemplate(id) {
+            const index = this.currentProject.templates.findIndex(t => t.id === id);
+
+            if (index !== -1) {
+                this.currentProject.templates.splice(index, 1);
+            }
+
+            if(this.selection.template==id){
+                this.selection.template=null;
+            }
+        },
+        deleteProduct(id) {
+            const index = this.currentProject.products.findIndex(p => p.id === id);
+
+            if (index !== -1) {
+                this.currentProject.products.splice(index, 1);
+            }
+
+            if(this.selection.product==id){
+                this.selection.product=null;
+            }
+        },
+        deleteLink(id) {
+            const index = this.currentProject.links.findIndex(l => l.id === id);
+
+            if (index !== -1) {
+                this.currentProject.links.splice(index, 1);
+            }
+        },
+        makeLink(){
+            const newLinkId = this.currentProject.links.length ? this.currentProject.links.slice(-1)[0].id+1 : 1;
+            const newLink = {
+                id: newLinkId,
+                tempId: this.selection.template,
+                prodId: this.selection.product,
+                name: `${this.selectedTemplate} x ${this.selectedProduct}`
+            }
+            this.currentProject.links.push(newLink);
+            this.selection = {                
+                template: null,
+                product: null
+            }
+        },
+        addEmptyProducts(number){
+            for (let i = 0; i < number; i++) {
+                this.addEmptyProduct();
+            }
+        },
+        addProducts(products){
+            this.currentProject.products = this.currentProject.products.concat(products);
+        },
+        addEmptyProduct(){
+            const newProduktId = this.currentProject.products.length ? this.currentProject.products.slice(-1)[0].id+1 : 1;
+            const newProduct = {
+                id: newProduktId,
+                name: `Produkt ${newProduktId}`,
+                image: "pills.png"
+            }
+            this.currentProject.products.push(newProduct);
+        },
+        addTemplates(templates){
+            this.currentProject.templates = this.currentProject.templates.concat(templates);
+        },
+        resetSettings(){
+            Modal.confirm({
+                title: 'Zresetować ustawienia?',
+                content: 'Utracisz wszystkie zmiany w danym powiązaniu.',
+                cancelText: 'Anuluj',
+                okText: 'Resetuj',
+                icon: 'exclamation-circle',
+                onOk: () => {
+                    // this.removeProject(project)
+                }
+            }); 
         }
     }
  
@@ -89,6 +206,7 @@ export default {
         &__main {
             display: flex;
             height: calc(100% - 64px - 48px);
+            overflow-y: auto;
         }
 
         &__search {

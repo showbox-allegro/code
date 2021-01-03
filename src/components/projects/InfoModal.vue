@@ -28,7 +28,6 @@
 export default {
     props: {
         infoData: Object,
-        infoModal: Boolean
     },
     data(){
         return {
