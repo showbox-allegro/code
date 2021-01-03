@@ -1,7 +1,7 @@
 
 <template>
     <div class="graphics box">   
-        <h3 class="box__title">Grafiki</h3>
+        <h3 class="box__title">Grafiki - todo</h3>
         <div class="box__empty">
             <p>Dodaj powiązania, aby rozpocząć! </p>
         </div>

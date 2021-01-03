@@ -1,6 +1,6 @@
 <template>
     <li>
-        <a-checkbox>
+        <a-checkbox @change="$emit('toggleSelect')">
             <a-badge class="items__badge" :count="index + 1" />
             {{ tempName }} x {{ prodName }}
         </a-checkbox>

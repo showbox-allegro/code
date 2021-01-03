@@ -9,11 +9,11 @@
                         Eksportuj <a-icon type="down" />
                     </a>
                     <a-menu slot="overlay">
-                        <a-menu-item>
-                            <a href="javascript:;">Zaznaczone</a>
+                        <a-menu-item @click="$emit('exportLinks',selectedLinks)" :disabled="!selectedLinks.length">
+                            <p>Zaznaczone</p>
                         </a-menu-item>
-                        <a-menu-item>
-                            <a href="javascript:;">Wszystko</a>
+                        <a-menu-item @click="$emit('exportLinks')">
+                            <p>Wszystko</p>
                         </a-menu-item>
                     </a-menu>
                 </a-dropdown>
@@ -35,6 +35,7 @@
                 @editLink="$emit('editLink',link.id)"
                 @resetSettings="$emit('resetSettings')"
                 @deleteLink="$emit('deleteLink',link.id)"
+                @toggleSelect="toggleSelectLink(link.id)"
             />  
         </ul>
     </div>
@@ -55,7 +56,8 @@ export default {
     },
     data(){
         return {
-            query:""
+            query:"",
+            selectedLinks: []
         }
     },
     computed: {
@@ -76,6 +78,16 @@ export default {
                 this.linksWithNames;
         }
     },
+    methods: {
+        toggleSelectLink(id){
+            const index = this.selectedLinks.findIndex(l => l === id);
+            if (index !== -1) {
+                this.selectedLinks.splice(index, 1);
+            } else {
+                this.selectedLinks.push(id);
+            }
+        }
+    }
 
  
 }

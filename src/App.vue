@@ -11,16 +11,16 @@
 			/> 
 
 			<a-layout-content>
-			<s-projects 
-				v-if="view=='projects'"
-				:sorters="sorters"
-				@editProject="editProject($event)"
-				@createProject="createProject"
-			></s-projects>
-			<s-project 
-				v-if="view=='project'"
-				:currentProject = "currentProject"
-			/>
+				<s-projects 
+					v-if="view=='projects'"
+					:sorters="sorters"
+					@editProject="editProject($event)"
+					@createProject="createProject"
+				></s-projects>
+				<s-project 
+					v-if="view=='project'"
+					:currentProject = "currentProject"
+				/>
 			</a-layout-content>	
 
 

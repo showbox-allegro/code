@@ -30,6 +30,7 @@
                 @editLink="editLink"
                 @resetSettings="resetSettings"
                 @deleteLink="deleteLink"
+                @exportLinks="exportLinks"
             />
             <div class="links__info links__info--2" v-if="infoText">
                 <p>{{ infoText }}</p>
@@ -53,7 +54,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import { Modal } from 'ant-design-vue';
 import Templates from "./Templates";
 import Products from "./Products";
@@ -106,6 +107,7 @@ export default {
         }
     },
     methods: {
+        ...mapMutations(["showAlert"]),
         ...mapActions(["updateProject"]),
         selectTemplate(id) {
             this.selection.template == id ? this.selection.template = null : this.selection.template = id;
@@ -189,8 +191,18 @@ export default {
                 icon: 'exclamation-circle',
                 onOk: () => {
                     //TODO:
+                    this.showAlert({text: 'Zresetowano ustawienia', type: 'success'})
                 }
             }); 
+        },
+        exportLinks(linksToExport){
+            if(linksToExport) {
+                //TODO:
+                this.showAlert({text: 'Eksportowano zaznaczone linki', type: 'success'})
+            } else {
+                //TODO:
+                this.showAlert({text: 'Eksportowano wszystkie linki', type: 'success'})
+            }
         },
         saveAndClose(){
             this.saveProject(this.currentProject);

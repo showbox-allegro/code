@@ -82,12 +82,12 @@ export default {
 <style lang="less">
 
     .sidebar {
-        position: absolute;
+        position: fixed;
         top: 64px;
         bottom: 0px;
         left: 0px;
         width: 480px;
-        // height: 100%;
+        z-index: 3;
         background-color: @gray-1;
         border-right: solid 1px @gray-4;
         transition: width 0.3s ease-in-out;

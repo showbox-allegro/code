@@ -67,6 +67,9 @@ export default {
 <style lang="less">
 
     .header {
+        position: fixed;
+        z-index: 3;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
