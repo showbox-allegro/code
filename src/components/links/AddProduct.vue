@@ -1,17 +1,31 @@
 <template>
-    <a-modal 
+    <a-modal class="add-product"
         v-model="visible"
-        title="Dodaj produkty" 
-        @ok="$emit('addProducts')"
+        title="Dodaj ofertę" 
+        @ok="$emit('addProducts',selectedProducts)"
         @cancel="$emit('closeAddProductModal')"
     >
-        <p class="infoModal__desc">TODO</p>
+        <div class="add-product__search">
+            <a-input placeholder="Szukaj">
+                <a-icon slot="prefix" type="search" />
+            </a-input>
+        </div>
+        
+        <a-table 
+            v-if="products.length" 
+            :columns="columns" 
+            :data-source="products"
+            :row-selection="rowSelection"
+        >
+    
+
+        </a-table>
 
         <template slot="footer">
             <a-button key="back" type="default" @click="$emit('closeAddProductModal')">
                 Zamknij
             </a-button>
-            <a-button key="submit" type="primary" @click="$emit('addProducts')">
+            <a-button key="submit" type="primary" @click="$emit('addProducts',selectedProducts)">
                 Dodaj zaznaczone
             </a-button>
         </template>
@@ -20,29 +34,70 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
     name: 'AddProduct',
-    props: {
-        productsToAdd: Array,
-    },
     data(){
         return {
-            visible: true
+            visible: true,
+            selectedProducts: [],
+            columns: [
+                {
+                    title: 'Nazwa produktu',
+                    key: 'name',
+                    dataIndex: 'name'
+                },
+                {
+                    title: 'Nr oferty',
+                    key: 'offerId',
+                    dataIndex: 'offerId'
+                }
+            ],
+            rowSelection: {
+                // onChange: (selectedRowKeys, selectedRows) => {
+                //     // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+                // },
+                onSelect: (record, selected, selectedRows) => {
+                    //console.log(record, selected, selectedRows);
+                    this.selectedProducts = selectedRows;
+                },
+                onSelectAll: (selected, selectedRows) => {
+                //     //console.log(selected, selectedRows, changeRows);
+                    this.selectedProducts = selectedRows;
+                },
+            }
         }
     },
+    computed:{
+		...mapState({
+			products: state => state.ProductsModule.products,
+        }),
+    },
+    mounted(){
+        if (!this.products.length) {
+            this.getProducts();
+        }
+    },
+    methods: {
+        ...mapActions(["getProducts"])
+    }
 }
 </script>
 
 <style lang="less">
-    .infoModal {
-        &__desc {
-            font-size: 12px;
-            line-height: 20px;
-            font-weight: 400;
-        }
-
-        &__input {
-            margin-bottom: 8px;
-        }
+.add-product {
+    &__search {
+        padding: 16px;
+        border-bottom: solid 1px @gray-4;
     }
+    .ant-modal-body {
+        padding: 0px;
+    }
+    td:nth-child(3) {
+        color: @primary-6;
+        text-decoration: underline;
+    }
+}
+
 </style>

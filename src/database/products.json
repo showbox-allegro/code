@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Produkt 1",
+        "offerId": "1082756102984764124",
+        "image": "pills.png"
+    },
+    {
+        "id": 1,
+        "name": "Produkt 1",
+        "offerId": "1082756102984764124",
+        "image": "pills.png"
+    },
+    {
+        "id": 2,
+        "name": "Produkt 2",
+        "offerId": "1082756102984764124",
+        "image": "pills.png"
+    },
+    {
+        "id": 3,
+        "name": "Produkt 3",
+        "offerId": "1082756102984764124",
+        "image": "pills.png"
+    },
+    {
+        "id": 4,
+        "name": "Produkt 4",
+        "offerId": "1082756102984764124",
+        "image": "pills.png"
+    },
+    {
+        "id": 5,
+        "name": "Produkt 5",
+        "offerId": "1082756102984764124",
+        "image": "pills.png"
+    }
+]

@@ -9,7 +9,7 @@
                 @click="$emit('closeLinks')"
             />
         </div>
-        <div class="links__main">
+        <div class="links__main scroll">
             <s-templates 
                 :selection="selection.template"
                 :templates="currentProject.templates"
@@ -200,6 +200,7 @@ export default {
             }
         },
         addProducts(products){
+            console.log(products);
             this.currentProject.products = this.currentProject.products.concat(products);
         },
         addEmptyProduct(){
@@ -275,7 +276,6 @@ export default {
         &__main {
             display: flex;
             height: calc(100% - 64px - 48px);
-            overflow-y: auto;
         }
 
         &__search {

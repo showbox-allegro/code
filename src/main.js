@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import store from "./config/store";
-import { Upload, Select, Divider, Checkbox, Empty, Dropdown, Badge, Menu, Modal, Spin, Alert, Icon, Row, Col, Avatar, Layout, Button, Input } from 'ant-design-vue';
+import { Table, Upload, Select, Divider, Checkbox, Empty, Dropdown, Badge, Menu, Modal, Spin, Alert, Icon, Row, Col, Avatar, Layout, Button, Input } from 'ant-design-vue';
 import App from './App.vue'
 import "@/less/main.less";
 
+Vue.use(Table);
 Vue.use(Upload);
 Vue.use(Select);
 Vue.use(Divider);

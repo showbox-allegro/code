@@ -186,3 +186,48 @@
     background-color: @gray-3;
     border-color: @gray-5;
 }
+
+.ant-table-thead > tr > th {
+    color: @gray-9;
+    background-color: @gray-2;
+    border-bottom-color: @gray-5;
+}
+
+.ant-table-tbody > tr > td {
+    border-bottom-color: @gray-5;
+}
+
+.ant-table {
+    color: @gray-9;
+}
+
+.ant-table-thead
+    > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+    > td,
+.ant-table-tbody
+    > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+    > td,
+.ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+    background-color: @gray-2;
+}
+
+.ant-table-tbody > tr.ant-table-row-selected td {
+    background-color: @primary-1;
+}
+
+.ant-table-thead > tr:hover.ant-table-row-selected > td,
+.ant-table-tbody > tr:hover.ant-table-row-selected > td {
+    background-color: @primary-1;
+}
+
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+    background-color: @gray-2;
+    border-color: @gray-5;
+    color: @gray-9;
+}
+
+.ant-pagination-item-active {
+    background-color: @gray-2;
+}

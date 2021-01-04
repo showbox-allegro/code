@@ -7,17 +7,20 @@ export default {
             state.products = payload.products;
             state.waiting = false;
         },
-        addProduct(state, payload){
-            state.products.unshift(payload.product);
-            state.waiting = false;
-        }
     },
     actions: {
-        getProducts() {
+        getProducts({ commit, rootState }) {
+            rootState.waiting = true;
+            setTimeout(()=> {
+            // axios
+                // .get(`/adres/${id}`).then(({ data }) => {
+                    const data = require("../../database/products.json")
+                    commit("setProducts", { products: data });
+                    commit("showAlert", { text: "Produkty załadowane", type: "success"});
+                    rootState.waiting = false;
+                    // });
+            },3000)
 
         },
-        addProduct() {
-
-        }
     },
 };

@@ -1,5 +1,5 @@
 <template>
-    <div class="products">   
+    <div class="products ">   
         <div class="title">
             <h3>Produkty</h3>
             <a-button type="dashed">
@@ -35,7 +35,6 @@
         </ul>
         <s-add-product 
             v-if="addProductModal"
-            :productsToAdd= "productsToAdd"
             @addProducts = "addProducts"
             @closeAddProductModal = "addProductModal = false"
         />
@@ -82,18 +81,18 @@ export default {
             emptyProductsNumber: 3,
             emptyProductModal: false,
             addProductModal: false,
-            productsToAdd: [
-                {
-                    "id": 1,
-                    "name": "Produkt 1",
-                    "image": "pills.png"
-                },
-                {
-                    "id": 2,
-                    "name": "Produkt 2",
-                    "image": "pills.png"
-                }
-            ]
+            // productsToAdd: [
+            //     {
+            //         "id": 1,
+            //         "name": "Produkt 1",
+            //         "image": "pills.png"
+            //     },
+            //     {
+            //         "id": 2,
+            //         "name": "Produkt 2",
+            //         "image": "pills.png"
+            //     }
+            // ]
         }
     },
     computed: {
@@ -110,9 +109,9 @@ export default {
             this.emptyProductModal = false;
             this.$emit('addEmptyProducts',this.emptyProductsNumber)
         },
-        addProducts(){
+        addProducts(products){
             this.addProductModal = false;
-            this.$emit('addProducts',this.productsToAdd);
+            this.$emit('addProducts',products);
         } 
     }
  
