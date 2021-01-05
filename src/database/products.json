@@ -2,37 +2,49 @@
     {
         "id": 1,
         "name": "Produkt 1",
-        "offerId": "1082756102984764124",
-        "image": "pills.png"
-    },
-    {
-        "id": 1,
-        "name": "Produkt 1",
-        "offerId": "1082756102984764124",
-        "image": "pills.png"
+        "offerId": "1082756102984764121",
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
     },
     {
         "id": 2,
         "name": "Produkt 2",
-        "offerId": "1082756102984764124",
-        "image": "pills.png"
+        "offerId": "1082756102984764122",
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
     },
     {
         "id": 3,
-        "name": "Produkt 3",
-        "offerId": "1082756102984764124",
-        "image": "pills.png"
+        "name": "Produkt 3 o bardzo długiej nazwie",
+        "offerId": "1082756102984764123",
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
     },
     {
         "id": 4,
         "name": "Produkt 4",
         "offerId": "1082756102984764124",
-        "image": "pills.png"
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
     },
     {
         "id": 5,
         "name": "Produkt 5",
-        "offerId": "1082756102984764124",
-        "image": "pills.png"
+        "offerId": "1082756102984764125",
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Produkt 6",
+        "offerId": "1082756102984764126",
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Produkt 7",
+        "offerId": "1082756102984764127",
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Produkt 8",
+        "offerId": "1082756102984764128",
+        "image": "https://pcdn.columbian.com/wp-content/uploads/2019/10/PillBottle_opt.jpg"
     }
 ]

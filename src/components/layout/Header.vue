@@ -2,7 +2,7 @@
     <a-layout-header class="header">
 
         <div class="header__left">
-            <img class="header__logo" @click = "$emit('goToProjects')" src="../../assets/logo.svg">
+            <img class="header__logo" @click = "$emit('goToProjects')" src="../../assets/logo-white.svg">
 
             <div class="header__project" v-if="view == 'project' ">
                 <a-input
@@ -79,10 +79,12 @@ export default {
 
         &__left {
             display: flex;
+            align-items: center;
         }
 
         &__logo {
             cursor: pointer;
+            height: 32px;
         }
 
         &__search {
