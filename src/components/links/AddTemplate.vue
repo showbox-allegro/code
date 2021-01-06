@@ -13,13 +13,13 @@
                 <a-input-search v-model="queryCateg" class="add-template__sidebar-search" placeholder="Szukaj"/>
             </div>
             <s-empty v-if="queryCateg && !filteredCategories.length"/>
-            <ul v-else class="add-tempalte__categories scroll">
+            <ul v-else class="add-template__categories scroll">
                 <li 
                     v-for="category in filteredCategories" 
                     :key="category.id" 
                     :class="{'is-selected': selectedCategory==category.id}"
                     class="add-template__category"
-                    @click="selectedCategory=category.id"
+                    @click="selectedCategory=i"
                 >
                     {{ category.name }}
                 </li>
@@ -34,6 +34,8 @@
                                 v-for="temp in temps" 
                                 :key="temp.id"
                                 :temp="temp"
+                                :is-selected="selectedTemps.indexOf(temp.id)!=-1"
+                                @click.native="selectTemp(temp.id)"
                             />
                         </ul>
                     </a-tab-pane>
@@ -90,6 +92,7 @@ export default {
         return {
             visible: true,
             selectedCategory: null,
+            selectedTemps: [],
             queryCateg: "",
             filtrTemp: {
                 sort:"",
@@ -184,6 +187,22 @@ export default {
                 {
                     id: 6,
                     name: "Kategoria 6"
+                },
+                {
+                    id: 7,
+                    name: "Kategoria 7"
+                },
+                {
+                    id: 8,
+                    name: "Kategoria 8"
+                },
+                {
+                    id: 9,
+                    name: "Kategoria 9"
+                },
+                {
+                    id: 10,
+                    name: "Kategoria 10"
                 }
             ]
         }
@@ -196,6 +215,16 @@ export default {
                 : 
                 this.categories;
         }
+    },
+    methods: {
+        selectTemp(id){
+            const index = this.selectedTemps.indexOf(id);
+            if( index==-1 ) {
+                this.selectedTemps.push(id);
+            } else {
+                this.selectedTemps.splice(index,1);
+            }
+        }
     }
 }
 </script>
@@ -203,14 +232,24 @@ export default {
 <style lang="less">
     .add-template {
 
-        max-height: 80%;
+        .ant-modal {
+            top:48px;
+        }
+
+        .ant-modal-wrap {
+            overflow: hidden;
+        }
+  
 
         .ant-modal-body {
             display: flex;
+            align-items: stretch;
             padding: 0;
+            height: 100%;
         }
 
         &__sidebar {
+            flex-shrink: 0;
             position: relative;
             width: 233px;
             background-color: @gray-2;
@@ -235,7 +274,7 @@ export default {
         }
 
         &__categories {
-
+            max-height: calc(100vh - 96px - 200px + 64px - 97px);
         }
 
         &__category {
@@ -243,7 +282,7 @@ export default {
             align-items: center;
             padding: 0 24px;
             height: 40px;
-            line-height: 400;
+            line-height: 40px;
             opacity: 0.65;
             cursor: pointer;
             &:hover {
@@ -256,10 +295,11 @@ export default {
         }
 
         &__temps {
+            max-height: calc(100vh - 96px - 200px);
             display: flex;
             flex-wrap: wrap;
             padding: 16px;
-            width: 50%;
+            width: 600px;
             background-color: @gray-1;
             border-right: solid 1px @gray-4;
         }

@@ -1,12 +1,14 @@
 <template>
-    <li class="temp-card">
+    <li class="temp-card" :class="{'is-selected': isSelected}">
         <div class="temp-card__top">
-            <img class="temp-card__img" src="@/assets/graphics/banner.png"/>
+                <a-checkbox @click="e => e.preventDefault()" :class="{'ant-checkbox-checked': isSelected}"/>
+                <img class="temp-card__img" src="@/assets/graphics/banner.png"/>
         </div>
         <div class="temp-card__bottom">
             <p class="temp-card__title">{{temp.name}}</p>
             <p class="temp-card__desc">Opis szablonu: {{temp.desc}}</p>
         </div>
+            
     </li>
 </template>
 
@@ -14,7 +16,8 @@
 export default {
     name: 'TempCard',
     props: {
-        temp: Object
+        temp: Object,
+        isSelected: Boolean
     }
 }
 </script>
@@ -30,7 +33,18 @@ export default {
     border: solid 1px @gray-4;
     border-radius: 6px;
 
+    cursor: pointer;
+
+    &:hover {
+        border-color: @gray-6;
+    }
+
+    &.is-selected {
+        border-color: @primary-6;
+    }
+
     &__img {
+        margin-top: 16px;
         width: 100%;
     }
 
@@ -40,6 +54,7 @@ export default {
     }
 
     &__bottom {
+        border-radius: 0 0 6px 6px;
         padding: 16px;
         background-color: @gray-1;
     }
@@ -52,6 +67,9 @@ export default {
     }
 
     &__desc {
+        margin-top: 4px;
+        font-weight: 400;
+        color: @gray-7;
 
     }
 
