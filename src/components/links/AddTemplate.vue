@@ -29,15 +29,28 @@
 
                 <a-tabs default-active-key="1">
                     <a-tab-pane key="1" tab="Produktowe">
-                        <ul class="add-template__temps scroll">
-                            <s-temp-card 
-                                v-for="temp in temps" 
-                                :key="temp.id"
-                                :temp="temp"
-                                :is-selected="selectedTemps.indexOf(temp.id)!=-1"
-                                @click.native="selectTemp(temp.id)"
-                            />
-                        </ul>
+                        <div class="add-template__content">
+                            <div class="add-template__temps scroll">
+                                <s-empty class="add-template__temps-empty" v-if="filtrTemp.query && !filteredTemps.length"/>
+                                <ul v-else class="add-template__list">
+                                    <s-temp-card 
+                                        v-for="temp in filteredTemps" 
+                                        :key="temp.id"
+                                        :temp="temp"
+                                        :is-selected="selectedTemps.findIndex(t=>t.id==temp.id)!=-1"
+                                        @click.native="selectTemp(temp)"
+                                    />
+                                </ul>
+                            </div>
+                            <div class="add-template__preview scroll">
+                                <p class="add-template__preview-empty" v-if="!selectedTemps.length">Zaznacz szablon, aby zobaczyć grafiki</p>
+                                <div v-else>
+                                    <img class="add-template__preview-img" width='410px' src="@/assets/graphics/banner.png"/>
+                                    <img class="add-template__preview-img" width='310px' src="@/assets/graphics/banner.png"/>
+                                    <img class="add-template__preview-img" width='240px' src="@/assets/graphics/banner.png"/>
+                                </div>
+                            </div>
+                        </div>
                     </a-tab-pane>
                     <a-tab-pane key="2" tab="Generyki" force-render>
                         Content of Tab Pane 2
@@ -63,11 +76,13 @@
 
         </div>
 
+
+
         <template slot="footer">
             <a-button key="back" type="default" @click="$emit('closeAddTemplateModal')">
                 Zamknij
             </a-button>
-            <a-button key="submit" type="primary" @click="$emit('addTemplates')">
+            <a-button key="submit" type="primary" @click="$emit('addTemplates',selectedTemps)">
                 Dodaj zaznaczone
             </a-button>
         </template>
@@ -84,9 +99,6 @@ export default {
     components: {
         STempCard: TempCard,
         SEmpty: Empty
-    },
-    props: {
-        templatesToAdd: Array,
     },
     data(){
         return {
@@ -208,6 +220,13 @@ export default {
         }
     },
     computed: {
+        filteredTemps(){
+            return this.filtrTemp.query 
+                ? 
+                this.temps.filter(t=>t.name.toLowerCase().indexOf(this.filtrTemp.query.toLowerCase()) !== -1 )
+                : 
+                this.temps;
+        },
         filteredCategories(){
             return this.queryCateg 
                 ? 
@@ -217,10 +236,10 @@ export default {
         }
     },
     methods: {
-        selectTemp(id){
-            const index = this.selectedTemps.indexOf(id);
+        selectTemp(temp){
+            const index = this.selectedTemps.findIndex(t=>t.id==temp.id);
             if( index==-1 ) {
-                this.selectedTemps.push(id);
+                this.selectedTemps.push(temp);
             } else {
                 this.selectedTemps.splice(index,1);
             }
@@ -295,13 +314,28 @@ export default {
         }
 
         &__temps {
+            flex-shrink: 0;
+            height: 100%;
             max-height: calc(100vh - 96px - 200px);
-            display: flex;
-            flex-wrap: wrap;
-            padding: 16px;
+      
             width: 600px;
             background-color: @gray-1;
             border-right: solid 1px @gray-4;
+
+            &-empty {
+                margin: 0;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        &__list {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 16px;
         }
 
 
@@ -322,30 +356,57 @@ export default {
             .ant-dropdown-menu {
                 margin-top: -16px;
             }
+            .ant-tabs {
+                width: 100%;
+                height: 100%;
+            }
+            .ant-tabs-content {
+                height: 100%;  
+            }
+
+            .ant-tabs-extra-content {
+                display: flex;
+                align-items: center;
+                line-height: 64px;
+            }
+
+            .ant-tabs-bar {
+                padding: 0 16px;
+                margin: 0px;
+                background-color: @gray-2;
+                border-bottom: none;
+            }
+
+            .ant-tabs-nav-container {
+                font-size: 16px;
+                line-height: 40px;
+            }
         }
 
-
-        .ant-tabs {
-            width: 100%;
+        &__content {
+            display: flex;
             height: 100%;
         }
 
-        .ant-tabs-extra-content {
-            display: flex;
-            align-items: center;
-            line-height: 64px;
+        &__preview {
+            width: calc( 100% - 600px);
+            max-height: calc(100vh - 96px - 200px);
+            padding: 16px;
+            &-img {
+                max-width: 100%;
+                margin-bottom: 16px;
+            }
+            &-empty {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                color: @gray-7;
+            }
         }
 
-        .ant-tabs-bar {
-            padding: 0 16px;
-            margin: 0px;
-            background-color: @gray-2;
-            border-bottom: none;
-        }
 
-        .ant-tabs-nav-container {
-            font-size: 16px;
-            line-height: 40px;
-        }
+
     }
 </style>

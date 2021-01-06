@@ -1,4 +1,5 @@
 import Vue from "vue";
+import moment from "moment";
 
 export default {
     state: {
@@ -51,6 +52,8 @@ export default {
         },
         addProject({commit, rootState}, project) {
             rootState.waiting = true;
+            project.created =  moment().format("YYYY-MM-DD HH:mm");
+            project.updated = project.created;
             commit("addProject", { project });
             commit("showAlert", { text: "Nowy projekt został utworzony", type: "success"});
             rootState.waiting = false;
@@ -69,6 +72,7 @@ export default {
         },
         updateProject({commit,rootState},project){
             rootState.waiting = true;
+            project.updated = moment().format("YYYY-MM-DD HH:mm");
             commit("updateProject", { project });
             commit("showAlert", { text: "Pomyślnie zapisano projekt", type: "success"});
             rootState.waiting = false;

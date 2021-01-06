@@ -11,9 +11,27 @@
                     enter-button 
                     placeholder="Mój nowy projekt"
                 />
-                <a-button class="header__project-btn" type="default">
-                    <a-icon type="more" />
-                </a-button>
+                <a-dropdown>
+                    <a-button class="ant-dropdown-link header__project-btn" type="default" @click="e => e.preventDefault()">
+                        <a-icon type="more" />
+                    </a-button>
+                    <a-menu slot="overlay">
+                        <a-menu-item @click="$emit('saveProject')">
+                            <span><a-icon type="save" /> Zapisz</span>
+                        </a-menu-item>
+                        <a-menu-item @click="$emit('copyProject')">
+                            <span><a-icon type="copy" /> Duplikuj</span>
+                        </a-menu-item>
+                        <a-menu-item @click="$emit('infoProject')">
+                            <span ><a-icon type="code" /> Informacje</span>
+                        </a-menu-item>
+                        <a-menu-divider />
+                        <a-menu-item @click="$emit('deleteProject')">
+                            <span class="danger"><a-icon type="delete" /> Usuń</span>
+                        </a-menu-item>
+                    </a-menu>
+                </a-dropdown>
+
                 <p class="header__project-save"> Zapisano 5 minut temu</p>
             </div>
         </div>

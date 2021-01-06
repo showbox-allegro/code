@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 import { Modal } from 'ant-design-vue';
 import Templates from "./Templates";
 import Products from "./Products";
@@ -109,7 +109,6 @@ export default {
     },
     methods: {
         ...mapMutations(["showAlert"]),
-        ...mapActions(["updateProject","addProject"]),
         selectTemplate(id) {
             this.selection.template == id ? this.selection.template = null : this.selection.template = id;
         },
@@ -216,9 +215,8 @@ export default {
             this.currentProject.templates = this.currentProject.templates.concat(templates);
         },
         editLink(id){
-            this.saveProject();
+            this.$emit('saveProject');
             this.$emit('closeLinks',id);
-
         },
         resetSettings(){
             Modal.confirm({
@@ -243,20 +241,12 @@ export default {
             }
         },
         saveAndClose(){
-            this.saveProject(this.currentProject);
+            this.$emit('saveProject');
             this.$emit('closeLinks');
         },
         autoSaveProject(){
             //TODO:
         },
-        saveProject(){
-            //TODO:
-            if(this.currentProject.id){
-                this.updateProject(this.currentProject);
-            } else {
-                this.addProject(this.currentProject);
-            }
-        }
     }
  
 }

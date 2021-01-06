@@ -25,7 +25,6 @@
         </ul>
         <s-add-template 
             v-if="addTemplateModal"
-            :templatesToAdd= "templatesToAdd"
             @addTemplates = "addTemplates"
             @closeAddTemplateModal = "addTemplateModal = false"
         />
@@ -52,20 +51,6 @@ export default {
         return {
             query: "",
             addTemplateModal: false,
-            templatesToAdd: [
-                {
-                    "id": 1,
-                    "name": "Szablon 1"
-                },
-                {
-                    "id": 2,
-                    "name": "Szablon 2"
-                },
-                {
-                    "id": 3,
-                    "name": "Szablon 3"
-                }
-            ]
         }
     },
     computed: {
@@ -78,9 +63,9 @@ export default {
         }
     },
     methods: {
-        addTemplates(){
+        addTemplates(templates){
             this.addTemplateModal = false;
-            this.$emit('addTemplates',this.templatesToAdd);
+            this.$emit('addTemplates',templates);
         } 
     }
 

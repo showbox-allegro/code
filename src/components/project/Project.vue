@@ -1,6 +1,6 @@
 
 <template>
-    <div>         
+    <div class="project">         
         <s-sidebar     
             @openLinks="openLinks"
             @selectLink="selectLink"
@@ -25,6 +25,7 @@
         <s-links 
             v-if="linksEditor"
             @closeLinks="closeLinks"
+            @saveProject="$emit('saveProject')"
             :currentProject="currentProject"
         />
 
@@ -104,6 +105,9 @@ export default {
             padding-top: 16px;
             margin-left: 60px;
             display: flex;
+        }
+        .ant-upload-list-picture-card .ant-upload-list-item-actions {
+            z-index: 2;
         }
     }
 </style>

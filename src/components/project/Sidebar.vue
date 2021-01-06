@@ -20,7 +20,7 @@
                     >
                     <a-menu-item 
                         :key="0" 
-                        @click="$emit('selectLink',0)" 
+                        @click="selectLink(0)" 
                         class="sidebar__item"
                     >
                         <a-badge 
@@ -36,7 +36,7 @@
                     <template v-for="(link, index) in currentProject.links">
                         <a-menu-item 
                             :key="link.id" 
-                            @click="$emit('selectLink',link.id)" 
+                            @click="selectLink(link.id)" 
                             class="sidebar__item"
                         >
                             <a-badge 
@@ -89,6 +89,10 @@ export default {
             if (!e.target.closest('.sidebar__main')){
                 this.toggleCollapsed();
             }
+        },
+        selectLink(id){
+            this.$emit('selectLink',id);
+            if(!this.collapsed) this.collapsed = true;
         }
     },
 }
@@ -116,8 +120,9 @@ export default {
             left: 480px;
             width: calc(100vw - 480px);
             background-color: #000;
-            transition: all 0.3s ease-in-out;
+            transition: opacity 0.2s ease-in-out;
             opacity: 0.8;
+
         }
 
         &.is-collapsed {

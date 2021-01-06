@@ -36,9 +36,9 @@
                     :project="project"
                     @click.native="$emit('editProject',project)"
                     @editProject="$emit('editProject',project)"
-                    @copyProject="copyProject(project)"
-                    @infoProject="infoProject(project)"
-                    @deleteProject="deleteProject(project)"
+                    @copyProject="$emit('copyProject',project)"
+                    @infoProject="$emit('infoProject',project)"
+                    @deleteProject="$emit('deleteProject',project)"
                 />
             </a-col>
             <a-col v-if="!sorters.query" :span="6">
@@ -47,21 +47,15 @@
                 />
             </a-col>
         </a-row>
-        <s-info-modal
-            v-if="infoModal"
-            :info-data= "infoData"
-            @saveInfoData = "saveInfoData"
-            @closeInfoModal = "infoModal = false"
-        />
+
     </div>
 </template>
 
 <script>
-import { Modal } from 'ant-design-vue';
-import { mapState, mapActions, mapMutations } from "vuex";
+
+import { mapState, mapActions } from "vuex";
 import ProjectCard from "./ProjectCard";
 import EmptyCard from "./EmptyCard";
-import InfoModal from "./InfoModal";
 import Empty from "../layout/Empty";
 
 
@@ -70,17 +64,10 @@ export default {
     components: {
         SProjectCard: ProjectCard,
         SEmptyCard: EmptyCard,
-        SInfoModal: InfoModal,
         SEmpty: Empty
     },
     props: {
         sorters: Object
-    },
-    data(){
-        return {
-            infoModal: false,
-            infoData: {}
-        }
     },
     computed:{
 		...mapState({
@@ -118,32 +105,7 @@ export default {
         }
 	},
 	methods: {
-        ...mapMutations(["showAlert"]),
-        ...mapActions(["getProjects", "removeProject", "duplicateProject"]),
-        copyProject(project){
-            this.duplicateProject(project)
-        },
-        infoProject(project){
-            this.infoModal = true;
-            this.infoData = project;
-        },
-        deleteProject(project){    
-            Modal.confirm({
-                title: 'Usunąć projekt?',
-                content: 'Usuwając projekt utracisz wszystkie grafiki i powiązania.',
-                cancelText: 'Anuluj',
-                okText: 'Usuń',
-                icon: 'exclamation-circle',
-                onOk: () => {
-                    this.removeProject(project)
-                }
-            });
-        },
-        saveInfoData(){
-            this.showAlert({ text: "Informacje zostały zapisane", type: "success"})
-            this.infoModal = false;
-        }
-
+        ...mapActions(["getProjects"]),
 	}
 
 }
@@ -176,5 +138,6 @@ export default {
                 color: @gray-9;
             }
         }
+
     }
 </style>
