@@ -15,7 +15,7 @@
                     theme="dark"
                     :inline-collapsed="collapsed"
                     class="sidebar__menu"
-                    v-if="currentProject.links.length"
+                    v-if="currentProject.templates.length && currentProject.products.length"
                     v-model="selection.link"
                     >
                     <a-menu-item 

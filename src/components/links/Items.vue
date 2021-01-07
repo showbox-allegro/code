@@ -25,7 +25,7 @@
         <s-empty v-if="query && !filteredLinks.length"/>
         <ul v-else class="links__items">
             <li
-                v-if="currentProject.links.length"
+                v-if="readyForAllLinks"
                 class="links__item" 
             >
                 <a-checkbox @change="toggleSelectLink(0)">
@@ -80,6 +80,9 @@ export default {
         }
     },
     computed: {
+        readyForAllLinks(){
+            return this.currentProject.templates.length && this.currentProject.products.length
+        },
         linksWithNames(){
             let links = this.currentProject.links;
             links.forEach (link => {

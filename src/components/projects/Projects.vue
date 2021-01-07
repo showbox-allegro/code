@@ -1,13 +1,13 @@
 
 <template>
     <div>   
-        <div class="projects__header">
-            <div class="projects__header-left">
+        <div class="listHeader">
+            <div class="listHeader__left">
                 <h2>Projekty </h2>
-                <span class="projects__header-number">({{projects.length}})</span>
+                <span class="listHeader__number">({{projects.length}})</span>
                 <a-dropdown>
-                    <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-                        <p class="projects__header-sort">Sortuj wg <a-icon type="down" /></p>
+                    <a class="ant-dropdown__link" @click="e => e.preventDefault()">
+                        <p class="listHeader__sort">Sortuj wg <a-icon type="down" /></p>
                     </a>
                     <a-menu slot="overlay">
                         <a-menu-item @click="sorters.sort='name'">
@@ -112,32 +112,6 @@ export default {
 </script>
 
 <style lang="less">
-    .projects {
-        &__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 24px 0;
 
-            &-left {
-                display: flex;
-                align-items: flex-end;
-            }
 
-            &-number {
-                margin-bottom: 4px;
-                margin-left: 8px;
-                font-size: 16px;
-                font-weight: 600;
-            }
-
-            &-sort {
-                margin-bottom: 4px;
-                margin-left: 26px;
-                font-weight: 400;
-                color: @gray-9;
-            }
-        }
-
-    }
 </style>

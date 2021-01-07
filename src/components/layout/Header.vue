@@ -52,7 +52,7 @@
                 <a-menu-item>
                     <span><a-icon type="user" /> Konto</span>
                 </a-menu-item>
-                <a-menu-item>
+                <a-menu-item @click="$emit('showTemplates')">
                     <span><a-icon type="file-add" /> Dodaj szablon</span>
                 </a-menu-item>
                 <a-menu-divider />

@@ -12,6 +12,7 @@
 				@copyProject="copyProject(currentProject)"
 				@infoProject="infoProject(currentProject)"
 				@deleteProject="deleteProject(currentProject)"
+				@showTemplates="view='templates'"
 			/> 
 
 			<a-layout-content>
@@ -23,7 +24,7 @@
 					@copyProject="copyProject($event)"
 					@infoProject="infoProject($event)"
 					@deleteProject="deleteProject($event)"
-				></s-projects>
+				/>
 				<s-project 
 					v-if="view=='project'"
 					:currentProject = "currentProject"
@@ -35,8 +36,17 @@
 					@saveInfoData = "saveInfoData"
 					@closeInfoModal = "infoModal = false"
 				/>
+				<s-templates 
+					v-if="view=='templates'"
+					:sorters="sorters"
+				/>
 			</a-layout-content>	
 
+					<!-- @editTemp="editTemp($event)"
+					@createTemp="createTemp"
+					@copyTemp="copyTemp($event)"
+					@infoTemp="infoTemp($event)"
+					@deleteTemp="deleteTemp($event)" -->
 
 		</a-layout>
 
@@ -67,6 +77,7 @@ import Project from './components/project/Project.vue';
 import Projects from './components/projects/Projects.vue';
 import Mask from "./components/layout/Mask";
 import InfoModal from "./components/layout/InfoModal";
+import Templates from './components/templates/Templates.vue';
 
 export default {
 	name: 'App',
@@ -76,6 +87,7 @@ export default {
 		SProject: Project,
 		sMask: Mask,
 		SInfoModal: InfoModal,
+		STemplates: Templates
 	},
 	data(){
 		return {

@@ -39,56 +39,5 @@ export default {
 </script>
 
 <style lang="less">
-    .card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
-        min-height: 325px;
-        border: solid 1px @gray-4;
-        border-radius: 6px;
-        cursor: pointer;
 
-        &:hover {
-            border: solid 1px @gray-6;
-            .card__options {
-                display: block;
-            }
-        }
-
-        &__top {
-            width: 100%;
-            height: 200px;
-            background-color: @gray-2;
-            border-radius: 6px 6px 0px 0px;
-        }
-
-        &__bottom {
-            position: relative;
-            padding: 24px;
-            width: 100%;
-        }
-
-        &__title {
-            margin-bottom: 8px;
-            font-size: 16px;
-            line-height: 24px;
-            font-weight: 600;
-            color: @gray-9;
-        }
-
-        &__info {
-            line-height: 22px;
-            font-weight: 400;
-            color: @gray-7;
-        }
-
-        &__options {
-            position: absolute;
-            right: 16px;
-            bottom: 16px;
-            padding: 8px;
-            display: none;
-        }
-    }
 </style>

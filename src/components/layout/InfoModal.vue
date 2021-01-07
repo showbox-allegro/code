@@ -5,12 +5,14 @@
         @ok="$emit('saveInfoData')"
         @cancel="$emit('closeInfoModal')"
     >
-        <p class="infoModal__desc">Analitic Tag</p>
-        <a-input class="infoModal__input" placeholder="Analitic Tag" />
-        <p class="infoModal__desc">Opis</p>
-        <a-textarea class="infoModal__input" placeholder="Opis" :rows="3"/>
-        <p class="infoModal__desc">Alternatywny opis obrazka</p>
-        <a-input class="infoModal__input" placeholder="Alternatywny opis obrazka" />
+        <p class="form__label">Analitic Tag</p>
+        <a-input class="form__input" placeholder="Analitic Tag" />
+
+        <p class="form__label">Opis</p>
+        <a-textarea class="form__input" placeholder="Opis" :rows="3"/>
+
+        <p class="form__label">Alternatywny opis obrazka</p>
+        <a-input class="form__input" placeholder="Alternatywny opis obrazka" />
 
         <template slot="footer">
             <a-button key="back" type="default" @click="$emit('closeInfoModal')">
@@ -38,15 +40,5 @@ export default {
 </script>
 
 <style lang="less">
-    .infoModal {
-        &__desc {
-            font-size: 12px;
-            line-height: 20px;
-            font-weight: 400;
-        }
 
-        &__input {
-            margin-bottom: 8px;
-        }
-    }
 </style>

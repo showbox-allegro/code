@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "name": "Szablon 1",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 2,
+        "name": "Szablon 2",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 3,
+        "name": "Szablon 3",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 4,
+        "name": "Szablon 4",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 5,
+        "name": "Szablon 5",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 6,
+        "name": "Szablon 6",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 7,
+        "name": "Szablon 7",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 8,
+        "name": "Szablon 8",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    },
+    {
+        "id": 9,
+        "name": "Szablon 9",
+        "desc": "Stworzony na potrzeby kampanii X dla produktu Y",
+        "img": "banner.png",
+        "categoryId": 1
+    }
+]

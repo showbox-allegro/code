@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import Empty from "../layout/Empty";
 import TempCard from "./TempCard";
 
@@ -110,71 +111,6 @@ export default {
                 sort:"",
                 query: ""
             },
-            temps: [
-                {
-                    id: 1,
-                    name: "Szablon 1",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 2,
-                    name: "Szablon 2",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 3,
-                    name: "Szablon 3",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 4,
-                    name: "Szablon 4",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 5,
-                    name: "Szablon 5",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 6,
-                    name: "Szablon 6",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 7,
-                    name: "Szablon 7",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 8,
-                    name: "Szablon 8",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                },
-                {
-                    id: 9,
-                    name: "Szablon 9",
-                    desc: "Stworzony na potrzeby kampanii X dla produktu Y",
-                    img: "",
-                    categoryId: 1
-                }
-            ],
             categories: [
                 {
                     id: 1,
@@ -220,6 +156,9 @@ export default {
         }
     },
     computed: {
+        ...mapState({
+			temps: state => state.TemplatesModule.temps,
+        }),
         filteredTemps(){
             return this.filtrTemp.query 
                 ? 
@@ -235,7 +174,13 @@ export default {
                 this.categories;
         }
     },
+    mounted(){
+        if (!this.temps.length) {
+            this.getTemps();
+        }
+    },
     methods: {
+        ...mapActions(["getTemps"]),
         selectTemp(temp){
             const index = this.selectedTemps.findIndex(t=>t.id==temp.id);
             if( index==-1 ) {
