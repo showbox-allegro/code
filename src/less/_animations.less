@@ -7,3 +7,18 @@
 .back-leave-active {
     transition: background-color 0.3s ease-in-out;
 }
+
+.fadeIn-enter {
+    opacity: 0;
+    transform: translateX(-200px);
+}
+.fadeIn-leave-to {
+    position: absolute;
+    opacity: 0;
+    transform: translateX(200px);
+}
+
+.fadeIn-enter-active,
+.fadeIn-leave-active {
+    transition: all 0.3s linear;
+}

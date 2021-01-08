@@ -54,8 +54,8 @@
 <script>
 
 import { mapState, mapActions } from "vuex";
-import ProjectCard from "./ProjectCard";
-import EmptyCard from "./EmptyCard";
+import ProjectCard from "./components/ProjectCard";
+import EmptyCard from "./components/EmptyCard";
 import Empty from "../layout/Empty";
 
 
@@ -110,8 +110,3 @@ export default {
 
 }
 </script>
-
-<style lang="less">
-
-
-</style>

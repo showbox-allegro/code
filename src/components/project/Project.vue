@@ -19,6 +19,7 @@
                 @exportSelectedGraphics="exportSelectedGraphics"
                 @exportAllCreations="exportAllCreations"
                 @exportAllLinks="exportAllLinks"
+                @editBanner="bannerEditor=true"
             />
         </div>
 
@@ -29,15 +30,22 @@
             :currentProject="currentProject"
         />
 
+        <s-banner 
+            v-if="bannerEditor"
+            :banner="{}"
+            @closeBanner="bannerEditor=false"
+        />
+
     </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
-import Sidebar from "./Sidebar";
-import Edition from "./Edition";
-import Graphics from "./Graphics";
+import Sidebar from "./components/Sidebar";
+import Edition from "./components/Edition";
+import Graphics from "./components/Graphics";
 import Links from "../links/Links";
+import Banner from "../banner/Banner";
 
 export default {
     name: 'Project',
@@ -45,7 +53,8 @@ export default {
         SSidebar: Sidebar,
         SEdition: Edition,
         SGraphics: Graphics,
-        SLinks: Links
+        SLinks: Links,
+        SBanner: Banner
     },
     props: {
         currentProject: Object
@@ -53,6 +62,7 @@ export default {
     data(){
         return {
             linksEditor: false,
+            bannerEditor: false,
             selection: {
                 link: []
             }

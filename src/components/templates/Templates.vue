@@ -60,10 +60,10 @@
 <script>
 
 import { mapState, mapActions } from "vuex";
-import TempCard from "./TempCard";
-import EmptyCard from "./EmptyCard";
+import TempCard from "./components/TempCard";
+import EmptyCard from "./components/EmptyCard";
 import Empty from "../layout/Empty";
-import NewTemp from "./NewTemp";
+import NewTemp from "./components/NewTemp";
 
 export default {
     name: 'Templates',

@@ -56,9 +56,9 @@
 <script>
 import { mapMutations } from "vuex";
 import { Modal } from 'ant-design-vue';
-import Templates from "./Templates";
-import Products from "./Products";
-import Items from "./Items";
+import Templates from "./components/Templates";
+import Products from "./components/Products";
+import Items from "./components/Items";
 
 export default {
     name: 'Links',
