@@ -23,11 +23,18 @@
                 </a-dropdown>
             </a-button>
         </div>
+        <div class="graphics__search">
+            <a-select mode="tags" placeholder="Szukaj po rozmiarze" @change="searchSize">
+                <a-select-option v-for="size in allSizes" :key="size">
+                    {{ size }}
+                </a-select-option>
+            </a-select>
+        </div>
         <div v-if="!selected" class="box__empty">
             <p>Dodaj powiązania, aby rozpocząć! </p>
         </div>
         <ul v-else class="box__main">
-            <li v-for="banner in banners" :key="banner.id" class="banner">
+            <li v-for="banner in filteredBanners" :key="banner.id" class="banner">
                 <div class="banner__header">
                     <a-checkbox @change="toggleSelect(banner.id)" class="banner__checkbox">{{ banner.size }}</a-checkbox>
                     <a-button @click="$emit('editBanner',banner)" class="banner__btn" type="default">
@@ -51,6 +58,7 @@ export default {
     },
     data(){
         return {
+            selectedSizes: [],
             selectedBanners: [],
             banners: [
                 {
@@ -71,6 +79,18 @@ export default {
             ]
         }
     },
+    computed: {
+        allSizes(){
+            return this.banners.map(b=>b.size)
+        },
+        filteredBanners(){
+            return this.selectedSizes.length
+                ?
+                this.banners.filter(b=> this.selectedSizes.indexOf(b.size)!==-1)
+                : 
+                this.banners;
+        }
+    },
     methods: {
         toggleSelect(id){
             const index = this.selectedBanners.findIndex(l => l === id);
@@ -79,6 +99,9 @@ export default {
             } else {
                 this.selectedBanners.push(id);
             }
+        },
+        searchSize(value){
+            this.selectedSizes = value;
         }
     }
  
@@ -90,6 +113,13 @@ export default {
         width: calc(50% - 8px);
         height: calc(100vh - 64px - 16px - 24px);
 
+        &__search {
+            padding: 12px 16px;
+            border-bottom: solid 1px @gray-4;
 
+            .ant-select{
+                width: 100%;
+            }
+        }
     }
 </style>

@@ -20,9 +20,9 @@ export default {
         prefixColor: String,
         warning: Boolean,
     },
-    data(){
-        return {
-            dataObject: this.obj || {}
+    computed: {
+        dataObject(){
+            return this.obj || {}
         }
     }
 

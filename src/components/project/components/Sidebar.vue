@@ -22,6 +22,7 @@
                         :key="0" 
                         @click="selectLink(0)" 
                         class="sidebar__item"
+                        :class="{'is-warning':getAllWarnings()}"
                     >
                         <a-badge 
                             class="sidebar__badge"
@@ -33,25 +34,27 @@
                             Wszystkie szablony x Wszystkie produkty
                         </span>
                     </a-menu-item>
-                    <template v-for="(link, index) in currentProject.links">
-                        <a-menu-item 
-                            :key="link.id" 
-                            @click="selectLink(link.id)" 
-                            class="sidebar__item"
-                        >
-                            <a-badge 
-                                class="sidebar__badge"
-                                :count="index+2" 
-                            />
-                            <span 
-                                class="sidebar__name" 
-                                >
-                                {{ currentProject.templates.find(t=> t.id == link.tempId).name }}
-                                x
-                                {{ currentProject.products.find(p=> p.id == link.prodId).name }}
-                            </span>
-                        </a-menu-item>
-                    </template>
+
+                    <a-menu-item 
+                        v-for="(link, index) in currentProject.links"
+                        :key="link.id" 
+                        @click="selectLink(link.id)" 
+                        class="sidebar__item"
+                        :class="{'is-warning':getWarning(link)}"
+                    >
+                        <a-badge 
+                            class="sidebar__badge"
+                            :count="getWarning(link)?'!':index+2" 
+                        />
+                        <span 
+                            class="sidebar__name" 
+                            >
+                            {{ currentProject.templates.find(t=> t.id == link.tempId).name }}
+                            x
+                            {{ currentProject.products.find(p=> p.id == link.prodId).name }}
+                        </span>
+                    </a-menu-item>
+
                 </a-menu>
                 <div class="sidebar__empty" @click="$emit('openLinks')" v-else>
                     <p v-if="!collapsed">Dodaj powiązania, aby rozpocząć! </p>
@@ -93,6 +96,24 @@ export default {
         selectLink(id){
             this.$emit('selectLink',id);
             if(!this.collapsed) this.collapsed = true;
+        },
+        getTempWarnings(temp){
+            return !temp.fontSize || !temp.fontColor || !temp.backgroundColor || !temp.oneLine || !temp.moreLines 
+        },
+        getProdWarnings(prod){
+            return !prod.fontSize || !prod.fontColor || !prod.backgroundColor || !prod.oneLine || !prod.moreLines
+        },
+        getWarning(link){
+            const temp = this.currentProject.templates.find(t=>t.id==link.tempId);
+            const prod = this.currentProject.products.find(p=>p.id==link.prodId);
+
+            return this.getTempWarnings(temp) || this.getProdWarnings(prod); 
+        },
+        getAllWarnings(){
+            let isWarning = false;
+            this.currentProject.templates.forEach(t=> isWarning += this.getTempWarnings(t))
+            this.currentProject.products.forEach(p=> isWarning += this.getProdWarnings(p))
+            return isWarning
         }
     },
 }

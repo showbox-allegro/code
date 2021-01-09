@@ -57,7 +57,8 @@
             rows="2" 
             class="edition__input" 
             placeholder="Wzmocnij odporność przed jesienią!"
-            :class="{'has-warning':!prod.moreLine}"
+            :class="{'has-warning':!prod.moreLines}"
+            v-model="prod.moreLines"
         />
 
         <p class="form__label">Obrazek 1</p>
