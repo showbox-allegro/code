@@ -50,12 +50,6 @@
 
 			</a-layout-content>	
 
-					<!-- @editTemp="editTemp($event)"
-					@createTemp="createTemp"
-					@copyTemp="copyTemp($event)"
-					@infoTemp="infoTemp($event)"
-					@deleteTemp="deleteTemp($event)" -->
-
 		</a-layout>
 
 	

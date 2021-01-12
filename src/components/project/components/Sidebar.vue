@@ -101,7 +101,7 @@ export default {
             return !temp.fontSize || !temp.fontColor || !temp.backgroundColor || !temp.oneLine || !temp.moreLines 
         },
         getProdWarnings(prod){
-            return !prod.fontSize || !prod.fontColor || !prod.backgroundColor || !prod.oneLine || !prod.moreLines
+            return !prod.name || !prod.seller || !prod.price 
         },
         getWarning(link){
             const temp = this.currentProject.templates.find(t=>t.id==link.tempId);

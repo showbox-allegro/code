@@ -13,12 +13,6 @@
                         <a-menu-item @click="sorters.sort='name'">
                             <p>Nazwa</p>
                         </a-menu-item>
-                        <a-menu-item @click="sorters.sort='created'">
-                            <p>Data utworzenia</p>
-                        </a-menu-item>
-                        <a-menu-item @click="sorters.sort='updated'">
-                            <p>Data edycji</p>
-                        </a-menu-item>
                     </a-menu>
                 </a-dropdown>
             </div>
@@ -34,11 +28,6 @@
             <a-col v-for="temp in filteredTemps" :key="temp.id" :span="6">
                 <s-temp-card 
                     :temp="temp"
-                    @click.native="$emit('editTemp',temp)"
-                    @editTemp="$emit('editTemp',temp)"
-                    @copyTemp="$emit('copyTemp',temp)"
-                    @infoTemp="$emit('infoTemp',temp)"
-                    @deleteTemp="$emit('deleteTemp',temp)"
                 />
             </a-col>
             <a-col v-if="!sorters.query" :span="6">
@@ -95,14 +84,6 @@ export default {
 
             if(this.sorters.sort=='name'){
                 filtered.sort((a, b) => a.name.localeCompare(b.name))
-            }
-
-            if(this.sorters.sort=='created'){
-                filtered.sort((a, b) => new Date(b.created).getTime()-new Date(a.created).getTime())
-            }
-
-            if(this.sorters.sort=='updated'){
-                filtered.sort((a, b) => new Date(b.updated).getTime()-new Date(a.updated).getTime())
             }
 
             return filtered

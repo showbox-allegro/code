@@ -19,7 +19,7 @@
                     :key="category.id" 
                     :class="{'is-selected': selectedCategory==category.id}"
                     class="add-template__category"
-                    @click="selectedCategory=i"
+                    @click="selectedCategory=category.id"
                 >
                     {{ category.name }}
                 </li>
@@ -63,12 +63,6 @@
                         <a-menu slot="overlay">
                             <a-menu-item @click="filtrTemp.sort='name'">
                                 <p>Nazwa</p>
-                            </a-menu-item>
-                            <a-menu-item @click="filtrTemp.sort='created'">
-                                <p>Data utworzenia</p>
-                            </a-menu-item>
-                            <a-menu-item @click="filtrTemp.sort='updated'">
-                                <p>Data edycji</p>
                             </a-menu-item>
                         </a-menu>
                     </a-dropdown>
@@ -160,11 +154,17 @@ export default {
 			temps: state => state.TemplatesModule.temps,
         }),
         filteredTemps(){
-            return this.filtrTemp.query 
-                ? 
-                this.temps.filter(t=>t.name.toLowerCase().indexOf(this.filtrTemp.query.toLowerCase()) !== -1 )
-                : 
-                this.temps;
+            let filtered = this.temps; 
+
+            if(this.filtrTemp.query){
+                filtered = this.temps.filter(p=>p.name.toLowerCase().indexOf(this.filtrTemp.query.toLowerCase()) !== -1 );
+            }
+
+            if(this.filtrTemp.sort=='name'){
+                filtered.sort((a, b) => a.name.localeCompare(b.name))
+            }
+
+            return filtered
         },
         filteredCategories(){
             return this.queryCateg 
@@ -297,9 +297,6 @@ export default {
                 font-weight: 400;
                 color: @gray-9;
                 font-size: 14px;
-            }
-            .ant-dropdown-menu {
-                margin-top: -16px;
             }
             .ant-tabs {
                 width: 100%;
