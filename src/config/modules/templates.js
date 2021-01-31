@@ -22,7 +22,7 @@ export default {
                     commit("showAlert", { text: "Szablony załadowane", type: "success"});
                     rootState.waiting = false;
                     // });
-            },3000)
+            },1000)
 
         },
         addTemp({commit, rootState}, temp) {

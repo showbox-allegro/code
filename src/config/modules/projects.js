@@ -47,7 +47,7 @@ export default {
                     commit("showAlert", { text: "Projekty załadowane", type: "success"});
                     rootState.waiting = false;
                     // });
-            },3000)
+            },1000)
 
         },
         addProject({commit, rootState}, project) {

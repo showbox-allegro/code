@@ -6,14 +6,19 @@
 
             <div class="edition__font-size">
                 <p class="form__label">Font Family</p>
-                <s-input 
+                <a-select class="edition__select" placeholder="Font Family">
+                    <a-select-option v-for="i in 10" :key="i" >
+                        Font {{ i }}
+                    </a-select-option>
+                </a-select>
+                <!-- <s-input 
                     class="edition__input"
                     :placeholder="'Inter'"
                     :prefix="'font-size'"
                     :warning="!temp.fontSize"
                     :obj="temp"
                     :name="'fontSize'"
-                />
+                /> -->
             </div>
 
             <div class="edition__font-color">
@@ -66,6 +71,20 @@
         <s-temp-upload />
 
         <p class="form__label">Select</p>
+        <a-select class="edition__select">
+            <a-select-option v-for="i in 10" :key="i" >
+                Opcja {{ i }}
+            </a-select-option>
+        </a-select>
+
+        <p class="form__label">Wybierz Badge</p>
+        <a-select class="edition__select">
+            <a-select-option v-for="i in 10" :key="i" >
+                Opcja {{ i }}
+            </a-select-option>
+        </a-select>
+
+        <p class="form__label">Wybierz CTA</p>
         <a-select class="edition__select">
             <a-select-option v-for="i in 10" :key="i" >
                 Opcja {{ i }}

@@ -18,6 +18,13 @@
             </a-select-option>
         </a-select>
 
+        <p class="form__label">Tag picker</p>
+        <a-select mode="multiple" class="newTemp__select" placeholder="Tag picker">
+            <a-select-option v-for="i in 10" :key="i" >
+                {{ i }} x {{ i }}
+            </a-select-option>
+        </a-select>
+
         <p class="form__label">Słowa kluczowe</p>
         <a-input class="form__input" placeholder="Słowa kluczowe" v-model="keywords"/>
 

@@ -11,7 +11,7 @@
         />
         <a-dropdown>
             <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-                <a-icon type="more" />
+                <a-icon type="more"/>
             </a>
             <a-menu slot="overlay">
                 <a-menu-item @click="editMode = true">

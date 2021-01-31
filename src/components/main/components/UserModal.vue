@@ -10,6 +10,9 @@
         <p class="form__label">Nazwisko</p>
         <a-input class="form__input" placeholder="Nazwisko" />
 
+        <p class="form__label">Adres e-mail</p>
+        <a-input class="form__input" placeholder="Adres e-mail" />
+
         <template slot="footer">
             <a-button key="back" type="default" @click="$emit('closeUserModal')">
                 Zamknij

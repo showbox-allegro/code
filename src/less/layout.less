@@ -143,9 +143,6 @@ main {
 
     &:hover {
         border: solid 1px @gray-6;
-        .card__options {
-            display: block;
-        }
     }
 
     &__top {
@@ -183,7 +180,13 @@ main {
         right: 16px;
         bottom: 16px;
         padding: 8px;
-        display: none;
+        display: block;
+        font-size: 20px;
+        color: @gray-10;
+
+        &:hover {
+            color: @primary-6;
+        }
     }
 
     &__img {

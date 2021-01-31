@@ -9,7 +9,7 @@
             <p class="card__info"> {{ project.updated }}</p>
             <a-dropdown class="card__options">
                 <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-                    <a-icon type="more" />
+                    <a-icon type="more"/>
                 </a>
                 <a-menu slot="overlay">
                     <a-menu-item @click="$emit('editProject')">

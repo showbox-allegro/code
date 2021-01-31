@@ -19,7 +19,7 @@ export default {
                     commit("showAlert", { text: "Produkty załadowane", type: "success"});
                     rootState.waiting = false;
                     // });
-            },3000)
+            },1000)
 
         },
     },

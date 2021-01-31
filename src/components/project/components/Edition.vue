@@ -11,11 +11,19 @@
                 :temp="currentProject.templates.find(t=> t.id == currentLink.tempId)"
             />
             <template v-else>
-                <s-edit-temp 
-                    v-for="temp in currentProject.templates"
-                    :key="`temp ${temp.id}`"
-                    :temp="temp"
-                />
+                <a-tabs 
+                    :default-active-key="`temp ${currentProject.templates[0].id}`" 
+                >
+                    <a-tab-pane 
+                        v-for="temp in currentProject.templates" 
+                        :key="`temp ${temp.id}`" 
+                        :tab="temp.name"
+                    >
+                        <s-edit-temp                             
+                            :temp="temp"
+                        />
+                    </a-tab-pane>
+                </a-tabs>
             </template>
 
             <s-edit-prod
@@ -23,11 +31,19 @@
                 :prod="currentProject.products.find(t=> t.id == currentLink.prodId)"
             />
             <template v-else>
-                <s-edit-prod 
-                    v-for="prod in currentProject.products"
-                    :key="`prod ${prod.id}`"
-                    :prod="prod"
-                />
+                <a-tabs 
+                    :default-active-key="`prod ${currentProject.products[0].id}`" 
+                >
+                    <a-tab-pane 
+                        v-for="prod in currentProject.products"
+                        :key="`prod ${prod.id}`"
+                        :tab="prod.name"
+                    >
+                        <s-edit-prod 
+                            :prod="prod"
+                        />
+                    </a-tab-pane>
+                </a-tabs>
             </template>
 
             
@@ -93,12 +109,18 @@ export default {
 
         &__select {
             width: 100%;
+            margin-bottom: 16px;
         }
 
         & &__product:last-child {
             .ant-divider {
                 display: none;
             }
+        }
+
+        .ant-tabs-bar {
+            margin-bottom: 32px;
+            border-bottom-color: @gray-4;
         }
 
     }

@@ -24,7 +24,7 @@ export default new Vuex.Store({
         showAlert(state, payload){
             state.alertVisible = true;
             state.alert = payload; 
-            setTimeout(()=>{state.alertVisible = false}, 3000);
+            setTimeout(()=>{state.alertVisible = false}, 1000);
         },
 
     },

@@ -290,14 +290,17 @@ export default {
             margin-bottom: 4px;
             cursor: pointer;
 
-            .anticon {display: none;}
+            .anticon {
+                padding: 8px; 
+                color: @gray-10;
+                font-size: 16px;
+                transition: color 0.1s ease-in-out;
+            }
 
             &:hover {
                 border: 1px solid @gray-6;
-
                 .anticon {
-                    padding: 8px;
-                    display: block;
+                    color: @primary-6;
                 }
             }
 

@@ -98,7 +98,7 @@ export default {
             if(!this.collapsed) this.collapsed = true;
         },
         getTempWarnings(temp){
-            return !temp.fontSize || !temp.fontColor || !temp.backgroundColor || !temp.oneLine || !temp.moreLines 
+            return !temp.fontColor || !temp.backgroundColor || !temp.oneLine || !temp.moreLines 
         },
         getProdWarnings(prod){
             return !prod.name || !prod.seller || !prod.price 
@@ -264,6 +264,25 @@ export default {
             border-radius: 6px;
             color: @gray-10;
 
+            &:first-child {
+                background-color: @blue-1 !important;
+                border: 1px solid @blue-5 !important;
+                & .ant-badge-count {
+                    background: @blue-5;
+                    box-shadow: none !important;
+                }
+            }
+
+            &-selected.is-warning {
+                background-color: @gray-2 !important;
+                border: 1px solid #D89614 !important;
+
+                & .ant-badge-count {
+                    background: #D89614;
+                    box-shadow: none !important;
+                }
+            }
+
             &-selected {
                 background-color: @primary-1 !important;
                 border: 1px solid @primary-7 !important;
@@ -274,15 +293,7 @@ export default {
                 }
             }
 
-            &.is-warning {
-                background-color: @gray-2 !important;
-                border: 1px solid #D89614 !important;
 
-                & .ant-badge-count {
-                    background: #D89614;
-                    box-shadow: none !important;
-                }
-            }
         }
 
         .ant-menu-inline-collapsed {
