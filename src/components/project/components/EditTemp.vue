@@ -23,15 +23,17 @@
 
             <div class="edition__font-color">
                 <p class="form__label">Font Color</p>
-                <s-input 
-                    class="edition__input" 
-                    :placeholder="'#FF5A00'"
-                    :prefix="'font-colors'"
-                    :prefixColor="'#FF5A00'"
-                    :warning="!temp.fontColor"
-                    :obj="temp"
-                    :name="'fontColor'"
-                />
+                <div class="edition__input form__color">
+                    <input type="color" v-model="temp.fontColor"/>
+                    <s-input 
+                        :placeholder="'#FF5A00'"
+                        :prefix="'font-colors'"
+                        :prefixColor="'#FF5A00'"
+                        :warning="!temp.fontColor"
+                        :obj="temp"
+                        :name="'fontColor'"
+                    />
+                </div>
             </div>
         
  
@@ -39,15 +41,17 @@
         </div>
 
         <p class="form__label">Background Color</p>
-        <s-input 
-            class="edition__input" 
-            :placeholder="'#FF5A00'"
-            :prefix="'bg-colors'"
-            :prefixColor="'#FF5A00'"
-            :warning="!temp.backgroundColor"
-            :obj="temp"
-            :name="'backgroundColor'"
-        />
+        <div class="edition__input form__color">
+            <input type="color" v-model="temp.backgroundColor"/>
+            <s-input 
+                :placeholder="'#FF5A00'"
+                :prefix="'bg-colors'"
+                :prefixColor="'#FF5A00'"
+                :warning="!temp.backgroundColor"
+                :obj="temp"
+                :name="'backgroundColor'"
+            />
+        </div>
 
         <p class="form__label">Tekst - Jedna linia</p>
         <s-input 

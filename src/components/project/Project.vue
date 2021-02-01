@@ -19,7 +19,7 @@
                 @exportSelectedGraphics="exportSelectedGraphics"
                 @exportAllCreations="exportAllCreations"
                 @exportAllLinks="exportAllLinks"
-                @editBanner="bannerEditor=true"
+                @editBanner="editBanner"
             />
         </div>
 
@@ -32,7 +32,7 @@
 
         <s-banner 
             v-if="bannerEditor"
-            :banner="{}"
+            :banner="currentBanner"
             @closeBanner="bannerEditor=false"
         />
 
@@ -65,7 +65,8 @@ export default {
             bannerEditor: false,
             selection: {
                 link: []
-            }
+            },
+            currentBanner: {}
         }
     },
     computed: {
@@ -102,6 +103,10 @@ export default {
         exportAllLinks(){
             //TODO:
             this.showAlert({text: 'Eksportowano wszystkie Powiązania', type: 'success'})
+        },
+        editBanner(){
+            this.bannerEditor=true;
+            // this.currentBanner = ;
         }
     }
  

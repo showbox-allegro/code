@@ -12,36 +12,37 @@
         <div class="sbanner__main scroll">
             <div class="sbanner__side">
                 <label class="form__label">Font Family</label>
-                <s-input 
-                    class="edition__input"
-                    :placeholder="'Inter'"
-                    :prefix="'font-size'"
-                    :warning="!banner.fontSize"
-                    :obj="banner"
-                    :name="'fontSize'"
-                />
+                <a-select v-model="banner.fontFamily" class="edition__select" placeholder="Font Family">
+                    <a-select-option v-for="i in 10" :key="i" >
+                        Font {{ i }}
+                    </a-select-option>
+                </a-select>
 
                 <label class="form__label">Font Color</label>
-                <s-input 
-                    class="edition__input" 
-                    :placeholder="'#FF5A00'"
-                    :prefix="'font-colors'"
-                    :prefixColor="'#FF5A00'"
-                    :warning="!banner.fontColor"
-                    :obj="banner"
-                    :name="'fontColor'"
-                />
+                <div class="edition__input form__color">
+                    <input type="color" v-model="banner.fontColor"/>
+                    <s-input 
+                        :placeholder="'#FF5A00'"
+                        :prefix="'font-colors'"
+                        :prefixColor="'#FF5A00'"
+                        :warning="!banner.fontColor"
+                        :obj="banner"
+                        :name="'fontColor'"
+                    />
+                </div>
 
                 <label class="form__label">Background Color</label>
-                <s-input 
-                    class="edition__input" 
-                    :placeholder="'#FF5A00'"
-                    :prefix="'bg-colors'"
-                    :prefixColor="'#FF5A00'"
-                    :warning="!banner.backgroundColor"
-                    :obj="banner"
-                    :name="'backgroundColor'"
-                />
+                <div class="edition__input form__color">
+                    <input type="color" v-model="banner.backgroundColor"/>
+                    <s-input 
+                        :placeholder="'#FF5A00'"
+                        :prefix="'bg-colors'"
+                        :prefixColor="'#FF5A00'"
+                        :warning="!banner.backgroundColor"
+                        :obj="banner"
+                        :name="'backgroundColor'"
+                    />
+                </div>
 
                 <label class="form__label">Tekst - Jedna linia</label>
                 <s-input 
