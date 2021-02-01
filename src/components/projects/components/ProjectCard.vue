@@ -15,6 +15,9 @@
                     <a-menu-item @click="$emit('editProject')">
                         <span><a-icon type="edit" /> Edytuj</span>
                     </a-menu-item>
+                    <a-menu-item @click="$emit('renameProject')">
+                        <span><a-icon type="font-colors" /> Zmień nazwę</span>
+                    </a-menu-item>
                     <a-menu-item @click="$emit('copyProject')">
                         <span><a-icon type="copy" /> Duplikuj</span>
                     </a-menu-item>

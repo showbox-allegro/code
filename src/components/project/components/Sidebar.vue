@@ -26,7 +26,7 @@
                     >
                         <a-badge 
                             class="sidebar__badge"
-                            :count="'1'" 
+                            :count="getAllWarnings()?'!': '1'" 
                         />
                         <span 
                             class="sidebar__name" 
@@ -84,6 +84,11 @@ export default {
             collapsed: false,
         };
     },
+    mounted(){
+        if(this.currentProject.templates.length && this.currentProject.products.length){
+            this.$emit('selectLink',0);
+        }
+    },  
     methods: {
         toggleCollapsed() {
             this.collapsed = !this.collapsed;

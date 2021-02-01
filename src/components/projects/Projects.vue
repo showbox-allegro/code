@@ -39,6 +39,7 @@
                     @copyProject="$emit('copyProject',project)"
                     @infoProject="$emit('infoProject',project)"
                     @deleteProject="$emit('deleteProject',project)"
+                    @renameProject="$emit('renameProject',project)"
                 />
             </a-col>
             <a-col v-if="!sorters.query" :span="6">

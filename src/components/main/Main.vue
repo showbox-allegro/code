@@ -27,6 +27,7 @@
 					@copyProject="copyProject($event)"
 					@infoProject="infoProject($event)"
 					@deleteProject="deleteProject($event)"
+					@renameProject="renameProject($event)"
 				/>
 				<s-project 
 					v-if="view=='project'"
@@ -46,6 +47,12 @@
 				<s-user-modal
 					v-if="userModal"
 					@closeUserModal = "userModal = false"
+				/>
+				<s-rename-modal
+					v-if="renameModal"
+					:currentProject="currentProject"
+					@renameProject="saveProject(currentProject)"
+					@closeRenameModal="renameModal = false"
 				/>
 
 			</a-layout-content>	
@@ -80,6 +87,7 @@ import Projects from '../projects/Projects.vue';
 import Mask from "../layout/Mask";
 import InfoModal from "./components/InfoModal";
 import UserModal from "./components/UserModal";
+import RenameModal from "./components/RenameModal";
 import Templates from '../templates/Templates.vue';
 
 export default {
@@ -91,7 +99,8 @@ export default {
 		sMask: Mask,
 		SInfoModal: InfoModal,
 		SUserModal: UserModal,
-		STemplates: Templates
+		SRenameModal: RenameModal,
+		STemplates: Templates,
 	},
 	data(){
 		return {
@@ -116,7 +125,8 @@ export default {
 			},
 			infoModal: false,
 			infoData: {},
-			userModal: false
+			userModal: false,
+			renameModal: false,
 		}
 	},
 	computed:{
@@ -141,6 +151,10 @@ export default {
 			this.duplicateProject(project);
 			this.view = "projects";
 		},
+		renameProject(project){
+			this.currentProject = project;
+			this.renameModal=true;
+		},
 		deleteProject(project){    
             Modal.confirm({
                 title: 'Usunąć projekt?',
@@ -163,6 +177,7 @@ export default {
             this.infoModal = false;
 		},
 		saveProject(project){
+			this.renameModal = false;
             //TODO:
             if(project.id){
                 this.updateProject(project);
