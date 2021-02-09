@@ -1,49 +1,57 @@
 
 <template>
-    <div class="edition scroll box">   
-        <h4 class="box__title">Edycja</h4>
+    <div class="edition scroll">   
+        <h4 class="edition__title box__title">Edycja</h4>
         <div v-if="!currentLink || !selected" class="box__empty">
             <p>Dodaj powiązania, aby rozpocząć! </p>
         </div>
-        <div v-else class="box__main">
+        <div v-else>
             <s-edit-temp
+                class="edition__box"
                 v-if="currentLink.tempId"
                 :temp="currentProject.templates.find(t=> t.id == currentLink.tempId)"
             />
             <template v-else>
-                <a-tabs 
+                <!-- <a-tabs  
                     :default-active-key="`temp ${currentProject.templates[0].id}`" 
-                >
+                > 
                     <a-tab-pane 
                         v-for="temp in currentProject.templates" 
                         :key="`temp ${temp.id}`" 
                         :tab="temp.name"
-                    >
-                        <s-edit-temp                             
+                    > -->
+                        <s-edit-temp   
+                            class="edition__box"                          
                             :temp="temp"
+                            v-for="temp in currentProject.templates" 
+                            :key="`temp ${temp.id}`" 
                         />
-                    </a-tab-pane>
-                </a-tabs>
+                    <!-- </a-tab-pane>
+                </a-tabs> -->
             </template>
 
             <s-edit-prod
+                class="edition__box"
                 v-if="currentLink.prodId"
                 :prod="currentProject.products.find(t=> t.id == currentLink.prodId)"
             />
             <template v-else>
-                <a-tabs 
+                <!-- <a-tabs 
                     :default-active-key="`prod ${currentProject.products[0].id}`" 
                 >
                     <a-tab-pane 
                         v-for="prod in currentProject.products"
                         :key="`prod ${prod.id}`"
                         :tab="prod.name"
-                    >
+                    > -->
                         <s-edit-prod 
+                            class="edition__box"
                             :prod="prod"
+                            v-for="prod in currentProject.products"
+                            :key="`prod ${prod.id}`"
                         />
-                    </a-tab-pane>
-                </a-tabs>
+                    <!-- </a-tab-pane>
+                </a-tabs> -->
             </template>
 
             
@@ -84,6 +92,7 @@ export default {
         &__header {
             font-weight: 600;
             margin-bottom: 16px;
+            margin-top: 12px;
         }
 
         &__input {
@@ -121,6 +130,29 @@ export default {
         .ant-tabs-bar {
             margin-bottom: 32px;
             border-bottom-color: @gray-4;
+        }
+
+        &__box {
+            padding: 16px;
+            background-color: @gray-2;
+            border: 1px solid @gray-4;
+            border-radius: 6px;
+            margin-bottom: 16px;
+
+            &:first-child {
+                border-radius: 0px 0px 6px 6px;
+                border-top: none;
+            }
+
+            &:last-child {
+                margin-bottom: 0px;
+            }
+        }
+
+        &__title {
+            background-color: @gray-2;
+            border: 1px solid @gray-4;
+            border-radius: 6px 6px 0px 0px;
         }
 
     }
